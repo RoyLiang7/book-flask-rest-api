@@ -1,0 +1,220 @@
+# database (testdb2)
+    --- books
+    --- book_categories
+    --- book_types
+    --- authors
+
+
+
+# ============================= c o n v e n t i o n s ============================= #
+folder setup
+============
+    /book-rental-app
+        ---- /flask-rest-api        repo: [book-flask-rest-api]
+        ---- /node-rest-api         repo: [book-node-rest-api]
+        ---- /vue-client            repo: [book-vue-client]
+
+naming conventions
+==================
+    1. filename / foldername    (snake_case)
+    2. functionnames            (snake_case)
+    2. classname                (PascalCase)
+    3. variables                (snake_case)
+    4. constant                 (UPPPERCASE)
+
+    NOTE: Generally, kebab-case and camelCase is RARELY used in python
+
+imports
+=======
+    1. import <module_name> 
+    2. import <module_name> as <alt_name>
+    3  from <module_name> import <name> as <alt_name>
+    4. from <module_name> import <name(s)>
+        ---- from mod import a, b, c
+    5. from <module_name> import <name> as <alt_name>[, <name> as <alt_name> …]
+        ---- from mod import as AAA, b as BBB, c as CCC
+
+
+
+# =========================== f i r s t   i t e r a t i o n ======================= #
+# ======== f l a s k   r e s t   a p i
+structure
+=========
+    1.  igurations are declared !!!
+    2. all application sources codes are in /src folderkeep startup file simple (api.py)
+        --- import src app (__init__.py) - where all flask conf
+        a.  declare flask app in src __init__.py or a main.py file
+        b.  A configuration file (.ini) or a class (.py)
+        c.  seperate modules/packages for different functionalities
+
+    /root
+    ----
+        /logs
+            ---- error.log 
+        /src
+            ---- /controllers
+            ---- /services
+            ---- /utilities
+            __init__.py
+            config.py
+        api.py
+
+
+main (src/__init__.py) *****
+======================
+    ---- 1. initialize flask app here
+    ---- 2. Setup configration variables
+            a.  read from configuration file (config.ini)
+            b.  asssign to os.environ or app.config (????)
+                (database configuration/secret keys)
+    ---- 3. Register all blueprint routes from conrollers
+
+
+modules / packages ***** note::: all return values
+==================
+    1. services
+        ---- inheritance services
+            a. base_service (ABC, abstract)
+                setup abstract methods that must be implemented
+            b. all other service classes must inherit from base_service
+            c. implement all methods
+        ---- database cursors
+            a.  dictionary out for all gets
+            b.  use multi sql statement
+            c.  use stored procedure
+
+            d. get_by_id / get_all
+                --- always return a list of dictionary
+               insert
+                ---- always return the new get_by_id
+               update / delete
+                ---- always return the number affected rows
+
+    2. utilities
+        ---- database
+                a.  mysql-connector-python cursors
+        ---- 
+
+    NOTE: pay attention to returning values -> use (dictionary=True) in the cursor
+          by default -> fetchall will just return a tuple of the data !!!
+    NOTE: for all gets, always mark cursor -- dbcnx.cursor(dictionary=True)
+
+    2. controllers
+        ---- setup blueprint routes for all controllers
+                a. create api rest methods
+
+
+
+
+
+# =========================== s e c o n d   i t e r a t i o n ======================= #
+# ======== l o g g i n g   &   e x c e p t i o n   h a n d l i n g
+main (src/__init__.py)
+======================
+    ---- 1. Logging
+            a. add logging object
+            b. declare file handler for output to file
+            c. setup loggin format
+    ---- 2. Exception handling
+            a. add exception objects
+            b. declare httpexception and normal exception
+            c. use logging to write history to file
+
+
+
+
+
+# ========================== t h i r d   i t e r a t i o n =========================== #
+# --- https://obikastanya.medium.com/ultimate-guide-to-securing-your-application-with-jwt-best-practices-and-tips-6054fd21e638
+# --- https://rest-apis-flask.teclado.com/docs/flask_jwt_extended/jwt_claims_and_authorization/
+# --- https://flask-jwt-extended.readthedocs.io/en/stable/basic_usage.html
+# --- https://www.freecodecamp.org/news/jwt-authentication-in-flask/
+# --- https://rest-apis-flask.teclado.com/docs/flask_jwt_extended/jwt_claims_and_authorization/
+
+
+
+# ===== p a s s w o r d   e n c r y p t i o n
+    ---- 0. pip install flask-bcrypt
+    ---- 1. setup
+            a. initialize bcrypt from flask_bcrypt in __init__.py
+    ---- 2. services
+            a. create_user
+                -- encrypt user password and then stored hased password in database
+            b. validate
+                -- get login password and encrypy
+                -- compare user password from table with hashed login password
+
+
+# ===================== a u t h e n t i c a t i o n   (j w t) ======================== #
+    ---- 0. installation
+            a. flask-jwt-extended
+    ---- 1. setup
+            a. set config parameters in __init__.py
+                -- create config param for ["JWT_SECRET_KEY"]
+            b. initialize jwt object and attach to app
+            c. overrides (optional)
+                -- add_claims_loader
+                -- expired_token_loader
+
+    ---- 2. controllers/services    
+            a. user / authenticate
+                -- new method (token) to check existence of user by email and password
+                -- generate a new JWT and return to client
+                -- set identity to user.id or user object and (optional) override token expiry
+
+            b. other resources api
+                -- decorate with @jwt_required() to protect routes
+                NOTE: this jwt_required is imported from the library flask-jwt-extended
+
+
+
+# ===== a u t h e n t i c a t i o n   (b a s i c) / c u s t o m   p a c k a g e ====== #
+    ---- 0. custom module
+            a. flask-basicauth library has some issues ********
+    ---- 1. creation
+            a. /src/modules/http_basic_auth
+            b. http_basic_auth.py
+                -- new class HttpBasicAuth
+                -- decorator to override check_credentials
+            c. setup.py (for future when creating a package)
+                -- details of module
+    ---- 2. setup
+            d. instantiate basicauth object and attach to app
+                -- basic_auth = BasicAuth(app)
+                -- create config param for ["BASIC_AUTH_USERNAME"]
+                -- create config param for ["BASIC_AUTH_PASSWORD"]
+            e. overrides (optional)
+                -- check_credentials_loader
+    ---- 3. resources controllers
+            -- decorate authenticate api route with @basic_auth
+            NOTE: this basic_auth is instantiated in the __init__.py. Have to import from app    
+    ---- 4. Package setup
+            --- https://medium.com/@jonathan.hoffman91/a-step-by-step-guide-to-building-python-wheels-4ed8160809a2
+            a. from /src/module/http_basic_auth folder
+                -- CMD: python setup.py bdist_wheel
+            b. install package
+                -- CMD: pip install http_basic_auth
+
+
+
+
+
+
+# ========================= a s y n c h r o n i c i t y ============================== #
+# ---- https://flask.palletsprojects.com/en/stable/async-await/
+# ---- https://dev.mysql.com/doc/connector-python/en/connector-python-asyncio.html
+# ---- https://blogs.oracle.com/mysql/post/mysql-async-connectivity-with-connector-python
+
+
+
+
+
+# ===================== r e q u e s t s / h t t p x ================== #
+
+
+
+
+
+# ===================== f i n e   t u n i n g ======================= #
+# ---- https://medium.com/@joseleonsalgado/building-scalable-apis-with-flask-best-practices-for-software-engineers-c4305a687ed6
+

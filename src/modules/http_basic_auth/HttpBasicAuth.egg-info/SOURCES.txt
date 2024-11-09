@@ -1,0 +1,5 @@
+setup.py
+HttpBasicAuth.egg-info/PKG-INFO
+HttpBasicAuth.egg-info/SOURCES.txt
+HttpBasicAuth.egg-info/dependency_links.txt
+HttpBasicAuth.egg-info/top_level.txt
