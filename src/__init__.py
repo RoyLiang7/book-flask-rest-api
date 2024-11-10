@@ -62,15 +62,18 @@ app.config['BASIC_AUTH_PASSWORD'] = config['BASIC_AUTH']['PASSWORD']
 # ========================= r o u t i n g ============================= #
 # ---- https://realpython.com/flask-blueprint/
 
-from src.controllers.user_controller        import user_bp
-from src.controllers.role_controller        import role_bp
-from src.controllers.book_trans_controller  import trans_bp
+from src.controllers.user_controller           import user_bp
+from src.controllers.role_controller           import role_bp
+from src.controllers.book_trans_controller     import trans_bp
+from src.controllers.book_category_controller  import cat_bp
+from src.controllers.book_type_controller      import type_bp
 
-app.register_blueprint(user_bp, url_prefix="/book/user")
-app.register_blueprint(role_bp, url_prefix="/book/role")
-app.register_blueprint(trans_bp, url_prefix="/book/trans")
+app.register_blueprint(user_bp,  url_prefix="/book/user")
+app.register_blueprint(role_bp,  url_prefix="/book/role")
+app.register_blueprint(type_bp,  url_prefix="/book/type")
+app.register_blueprint(cat_bp,   url_prefix="/book/category")
 
-
+app.register_blueprint(trans_bp, url_prefix="/book/transaction")
 
 # ========================= l o g g i n g ============================== #
 # ---- https://docs.python.org/3/library/logging.handlers.html

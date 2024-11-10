@@ -6,28 +6,19 @@ class UserService(BaseService):
     def __init__(self):
         super().__init__()  # to gain access to parent objects
 
-    # --- implement abstract methods
-    def authenticate(self, data):
-        cursor = self.dbcnx.execute("select * from users where email = $s", (data["email"]))
-        response = cursor.fetchone()
-
-        if response:
-            pw_hash = bcrypt.generate_password_hash(data['password'])
-            if response['password'] == pw_hash:
-                return True
-            
-        return False
-
-
     def get_all(self):
         cursor = self.dbcnx.cursor(dictionary=True)
         
-        cursor.execute("select * from users")
+        cursor.execute("""
+            select t1.id as id, t1.name as name, t2.name as role, t3.name as company, t1.email as email, t1.status as status 
+                from users t1
+                    left join roles t2 on t1.role_id = t2.id
+                    left join companies t3 on t1.company_id = t3.id
+        """)
         response = cursor.fetchall() # ===> [{},{},{}]
 
         rowCount = cursor.rowcount
         cursor.close()
-        self.dbcnx.close()
 
         return response
 
@@ -35,23 +26,17 @@ class UserService(BaseService):
         cursor = self.dbcnx.cursor(dictionary=True)
 
         cursor.execute("select * from users where id = %s", (id,))
-        response = cursor.fetchone()  # ==> {"id":1, "name":"Kerrigan", }
-        # --> check if fetchall() for only one record
+        result = cursor.fetchall()  # ===> [{}]
+        
         cursor.close()
 
-        return response
+        return result
 
     def create(self, model):
         cursor = self.dbcnx.cursor()
 
-        name     = model['name']
-        email    = model['email']
-        password = model['password']
-
-        pw_hash = bcrypt.generate_password_hash(password)
-
-        cursor.execute("insert into users (name, email, password) values (%s, %s, %s)", 
-                                (name, email, pw_hash,))
+        cursor.execute("insert into users (name, email, role_id, company_id, password) values (%s, %s, %s, %s, %s)", 
+                                (model['name'], model['email'], model['role_id'], model['company_id'], model['password']))
 
         newId = cursor.lastrowid
         self.dbcnx.commit()     # important !!!!
@@ -59,16 +44,12 @@ class UserService(BaseService):
 
         return newId            # the id of the newly added record
 
-    def update(self, data):
+    def update(self, model):
         cursor = self.dbcnx.cursor()
 
-        id = data['id']
-        name = data['name']
-        email = data['email']
-        password = data['password']
-
-        cursor.execute("update users set name = %s, email = %s, password = %s where id = %s", 
-                                (name, email, password, id,))
+        cursor.execute("update users set name = %s, email = %s, role_id = %s, company_id = %s, password = %s where id = %s", 
+                                (model['name'], model['email'], model['role_id'], model['company_id'], model['password'], model['id']))
+        
         affected_rows = cursor.rowcount
         self.dbcnx.commit()
         cursor.close()
@@ -87,19 +68,7 @@ class UserService(BaseService):
 
 
 
-
     # --- class specific methods
-    def authenticate(self, data):
-        cursor = self.dbcnx.cursor(dictionary=True)
-
-        email = data['email']; password = data['password']
-        cursor.execute("select * from users where email = %s and password = %s", (email, password,))
-        response = cursor.fetchone()
-        cursor.close()
-
-        return response
-
-
     def get_related(self):
         # ---- https://dev.mysql.com/doc/connector-python/en/connector-python-api-mysqlcursor-execute.html
         cursor = self.dbcnx.cursor(dictionary=True)

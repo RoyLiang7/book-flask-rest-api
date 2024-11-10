@@ -1,7 +1,7 @@
 from src.services.base_service import BaseService
 
-class BookCategoryService(BaseService):
 
+class BookCategoryService(BaseService):
     def __init__(self):
         super().__init__()  # to gain access to parent objects
 
@@ -12,9 +12,7 @@ class BookCategoryService(BaseService):
 
         cursor.execute("select * from book_categories")
         result = cursor.fetchall()
-
         cursor.close()
-        self.dbcnx.close()
 
         return result
 
@@ -30,7 +28,7 @@ class BookCategoryService(BaseService):
     def create(self, data):
         cursor = self.dbcnx.cursor()
 
-        cursor.execute("insert into book_categories (description) values (%s)", (data['description']))
+        cursor.execute("insert into book_categories (description) values (%s, %s)", (data['description']))
         newId = cursor.lastrowid
 
         self.dbcnx.commit()
@@ -41,8 +39,7 @@ class BookCategoryService(BaseService):
     def update(self, data):
         cursor = self.dbcnx.cursor()
 
-        cursor.execute("update book_categories set description = %s where id = %s", 
-                            (data['description'], data['id']))
+        cursor.execute("update book_categories set description = %s where id = %s", (data['description'], id))
         affected_rows = cursor.rowcount
 
         self.dbcnx.commit()
@@ -53,8 +50,9 @@ class BookCategoryService(BaseService):
     def delete(self, id):
         cursor = self.dbcnx.cursor()
 
-        cursor.execute("delete from book_categories where id = %s", (id,))
+        cursor.execute("delete from book_types where id = %s", (id,))
         affected_rows = cursor.rowcount
+
         self.dbcnx.commit()
         cursor.close()
 

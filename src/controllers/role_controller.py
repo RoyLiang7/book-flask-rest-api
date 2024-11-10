@@ -1,4 +1,6 @@
+
 from src.services.role_service import RoleService
+
 from flask import Blueprint, jsonify, request
 
 role_bp = Blueprint('role_blueprint', __name__)
@@ -17,7 +19,6 @@ def get_by_id(id):
     result = role_srv.get_by_id(id)
 
     return jsonify(result), 200
-
 
 
 @role_bp.route("/", methods=["PUT"])

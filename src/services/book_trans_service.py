@@ -1,15 +1,9 @@
-from .base_service import BaseService
+from src.services.base_service import BaseService
+
 
 class BookTransactionService(BaseService):
     def __init__(self):
         super().__init__()  
-
-    # --- implement abstract methods
-    def get_all(self):
-        cursor = self.dbcnx.cursor(dictionary=True)
-
-    def get_by_id(self, id):
-        pass
 
 
     def test_trans(self):
@@ -17,18 +11,53 @@ class BookTransactionService(BaseService):
             self.dbcnx.start_transaction()
 
             cursor = self.dbcnx.cursor()
-            cursor.dbcnx.start_transaction()
-
             cursor.execute("insert into book_categories (description) values (%s)", ('test category', ) )
             cursor.execute("insert into book_types (description) values (%s)", ('test type', ) )
 
             self.dbcnx.commit()
+
         except Exception as ex:
             self.dbcnx.rollback()
             raise Exception(ex)
         finally:
             cursor.close()
 
+
+    # --- implement abstract methods
+    def get_all(self):
+        cursor = self.dbcnx.cursor(dictionary=True)
+
+        cursor.execute("""
+            select *
+                from book_trans_hdr t1
+                    left join book_trans_detl t2 on t1.id = t2.hdr_id
+                    left join users t3 on t1.user_id = t3.id
+                    left join books t4 on t2.book_id = t4.id
+                    left join book_types t5 on t2.type_id = t5.id
+                    left join book_categories t6 on t4.category_id = t6.id
+        """)
+        result = cursor.fetchall()
+        cursor.close()
+
+        return result
+
+    def get_by_id(self, id):
+        cursor = self.dbcnx.cursor(dictionary=True)
+
+        cursor.execute("""
+            select *
+                from book_trans_hdr t1
+                    left join book_trans_detl t2 on t1.id = t2.hdr_id
+                    left join users t3 on t1.user_id = t3.id
+                    left join books t4 on t2.book_id = t4.id
+                    left join book_types t5 on t2.type_id = t5.id
+                    left join book_categories t6 on t4.category_id = t6.id
+                where t1.id = %s
+        """,(id,))
+        result = cursor.fetchone()
+        cursor.close()
+
+        return result
 
     def create(self, data):
         try:
@@ -39,7 +68,7 @@ class BookTransactionService(BaseService):
             # --- trasaction hdr
             cursor.execute("""insert into book_trans_hdr (user_id, rent_days, total_amt)
                                     values (%s, %s, %s)
-                               """, (data['user_id'], data['rent_days'], data['total_amt']))
+                           """, (data['user_id'], data['rent_days'], data['total_amt']))
             newHdrId = cursor.lastrowid
 
             # --- transaction details
@@ -50,15 +79,67 @@ class BookTransactionService(BaseService):
             self.dbcnx.commit()            
 
             return newHdrId
-        except :
+        except Exception as ex:
             self.dbcnx.rollback()
+            raise Exception(ex)
         finally:
             cursor.close()
 
-
     def update(self, data):
-        pass
+        cursor = self.dbcnx.cursor()
+
+        cursor.execute("update book_trans_hdr set status = %s where id = %s", (2,))
+        affected_rows = cursor.rowcount
+        self.dbcnx.commit()
+        cursor.close()
+
+        return affected_rows
 
     def delete(self, id):
-        pass
+        cursor = self.dbcnx.cursor()
+
+        cursor.execute("update book_trans_hdr set status = %s where id = %s", (2,))
+        affected_rows = cursor.rowcount
+        self.dbcnx.commit()
+        cursor.close()
+
+        return affected_rows
+
+
+    # --- class methods
+    def get_by_date(self, start_date: str, end_date: str):
+        cursor = self.dbcnx.cursor(dictionary=True)
+
+        cursor.execute("""
+            select *
+                from book_trans_hdr t1
+                    left join book_detl t2 on t1.id = t2.hdr_id
+                    left join users t3 on t1.user_id = t3.id
+                    left join books t4 on t2.book_id = t4.id
+                    left join book_types t5 on t2.type_id = t5.id
+                    left join book_categories t6 on t4.category_id = t6.id
+                where t1.trans_date between %s and = %s
+        """,(start_date, end_date,))
+        result = cursor.fetchall()
+        cursor.close()
+
+        return result
+    
+    def get_by_user(self, user_id, status):
+        cursor = self.dbcnx.cursor(dictionary=True)
+
+        cursor.execute("""
+            select *
+                from book_trans_hdr t1
+                    left join book_detl t2 on t1.id = t2.hdr_id
+                    left join users t3 on t1.user_id = t3.id
+                    left join books t4 on t2.book_id = t4.id
+                    left join book_types t5 on t2.type_id = t5.id
+                    left join book_categories t6 on t4.category_id = t6.id
+                where t1.user_id = %s and t1.status = %s
+        """,(user_id, status,))
+        result = cursor.fetchall()
+        cursor.close()
+
+        return result
     

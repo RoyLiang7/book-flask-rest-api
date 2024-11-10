@@ -1,8 +1,6 @@
 import datetime
 
 from flask import Blueprint, jsonify, request
-from flask_jwt_extended import JWTManager, create_access_token, jwt_required
-
 from src.services.user_service import UserService
 
 

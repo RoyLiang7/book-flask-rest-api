@@ -17,11 +17,11 @@ class BaseService(ABC):
         pass
 
     @abstractmethod
-    def create(self, data):
+    def create(self, model):
         pass
 
     @abstractmethod
-    def update(self, data):
+    def update(self, model):
         pass
 
     @abstractmethod
