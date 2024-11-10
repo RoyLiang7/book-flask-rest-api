@@ -12,7 +12,9 @@ class BookCategoryService(BaseService):
 
         cursor.execute("select * from book_categories")
         result = cursor.fetchall()
+
         cursor.close()
+        self.dbcnx.close()
 
         return result
 

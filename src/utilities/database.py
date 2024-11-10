@@ -19,7 +19,8 @@ config = {
 # cnx = mysql.connector.connect(**config)
 
 # ---- pooling
-# -- https://dev.mysql.com/doc/connector-python/en/connector-python-connection-pooling.html
+# -- https://dev.mysql.com/doc/connector-python/en/connector-python-connection-pooling.
+# -- https://medium.com/@pardeep.singh14/setting-up-a-flask-application-with-connection-pooling-dfce896a0841
 pool = mysql.connector.pooling.MySQLConnectionPool(
           pool_name="mypool", 
           pool_size=5,

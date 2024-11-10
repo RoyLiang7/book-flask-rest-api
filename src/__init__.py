@@ -59,60 +59,16 @@ app.config['BASIC_AUTH_PASSWORD'] = config['BASIC_AUTH']['PASSWORD']
 
 
 
-
-
-# ======================= j w t   m a n a g e r ====================== #
-# JWT Initialization
-from flask_jwt_extended import JWTManager, create_access_token, jwt_required
-
-jwt = JWTManager(app)
-
-# -- overrides
-@jwt.additional_claims_loader           # generally used for authorisation
-def add_claims_to_jwt(identity):
-    if identity["role_id"] == 1:
-        return {"is_admin": True}
-    return {"is_admin": False}
-
-@jwt.expired_token_loader               # generally used to clear used token or logging purposes
-def expired_token_callback(jwt_header, jwt_payload):
-    return (
-        jsonify({"message": "The token has expired.", "error": "token_expired"}), 401
-    )
-
-
-# ====== c u s t o m   b a s i c   a u t h e n t i c a t i o n  ====== #
-# from src.modules.http_basic_auth.http_basic_auth import HttpBasicAuth
-from  http_basic_auth import HttpBasicAuth
-
-basic_auth = HttpBasicAuth(app)
-
-@basic_auth.check_credentials_loader
-def basic_auth_check_credentials(username, password):
-    print("custom check credentials !!!!")
-
-    return False
-
-
-
-# ======================= e n c r y p t i o n ========================= #
-# ---- https://flask-bcrypt.readthedocs.io/en/1.0.1/#usage
-from flask_bcrypt import Bcrypt
-
-bcrypt = Bcrypt(app)
-
-
-
-
 # ========================= r o u t i n g ============================= #
 # ---- https://realpython.com/flask-blueprint/
 
-from src.controllers.user_controller import user_bp
-from src.controllers.role_controller import role_bp
+from src.controllers.user_controller        import user_bp
+from src.controllers.role_controller        import role_bp
+from src.controllers.book_trans_controller  import trans_bp
 
-app.register_blueprint(user_bp, url_prefix="/user")
-app.register_blueprint(role_bp, url_prefix="/role")
-
+app.register_blueprint(user_bp, url_prefix="/book/user")
+app.register_blueprint(role_bp, url_prefix="/book/role")
+app.register_blueprint(trans_bp, url_prefix="/book/trans")
 
 
 
@@ -133,7 +89,6 @@ handler.setFormatter(logging.Formatter(log_format_2))
 # 
 logger = logging.getLogger(__name__)
 logger.addHandler(handler)
-
 
 
 

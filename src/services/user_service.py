@@ -1,4 +1,3 @@
-from src import bcrypt
 from src.services.base_service import BaseService
 
 
@@ -28,6 +27,7 @@ class UserService(BaseService):
 
         rowCount = cursor.rowcount
         cursor.close()
+        self.dbcnx.close()
 
         return response
 
