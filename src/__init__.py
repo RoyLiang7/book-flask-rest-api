@@ -17,7 +17,6 @@ app = Flask(__name__)
 
 
 
-
 # =============== c o n f i g u r a t i o n   f i l e =============== #
 import configparser
 from datetime import timedelta

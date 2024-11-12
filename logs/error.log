@@ -1,23 +1,14 @@
-ERROR:src:1146 (42S02): Table 'testdb2.book_detl' doesn't exist
+ERROR:src:1054 (42S22): Unknown column 'rental_fees' in 'field list'
 Traceback (most recent call last):
   File "D:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\mysql\connector\connection_cext.py", line 706, in cmd_query
     self._cmysql.query(
-_mysql_connector.MySQLInterfaceError: Table 'testdb2.book_detl' doesn't exist
+_mysql_connector.MySQLInterfaceError: Unknown column 'rental_fees' in 'field list'
 
 The above exception was the direct cause of the following exception:
 
 Traceback (most recent call last):
-  File "D:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\app.py", line 880, in full_dispatch_request
-    rv = self.dispatch_request()
-         ^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\app.py", line 865, in dispatch_request
-    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\Development\full-stack-2024\flask-rest-api\src\controllers\book_trans_controller.py", line 13, in get_all
-    result = trans_service.get_all()
-             ^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\Development\full-stack-2024\flask-rest-api\src\services\book_trans_service.py", line 31, in get_all
-    cursor.execute("""
+  File "D:\Development\full-stack-2024\flask-rest-api\src\services\book_trans_service.py", line 58, in create
+    cursor.execute("""insert into book_trans_detl (hdr_id, book_id, type_id, rental_fees, book_qty)
   File "D:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\mysql\connector\cursor_cext.py", line 357, in execute
     result = self._connection.cmd_query(
              ^^^^^^^^^^^^^^^^^^^^^^^^^^^
@@ -26,36 +17,67 @@ Traceback (most recent call last):
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
   File "D:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\mysql\connector\connection_cext.py", line 714, in cmd_query
     raise get_mysql_exception(
-mysql.connector.errors.ProgrammingError: 1146 (42S02): Table 'testdb2.book_detl' doesn't exist
-ERROR:src:404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+mysql.connector.errors.ProgrammingError: 1054 (42S22): Unknown column 'rental_fees' in 'field list'
+
+During handling of the above exception, another exception occurred:
+
 Traceback (most recent call last):
   File "D:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\app.py", line 880, in full_dispatch_request
     rv = self.dispatch_request()
          ^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\app.py", line 854, in dispatch_request
-    self.raise_routing_exception(req)
-  File "D:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\app.py", line 463, in raise_routing_exception
-    raise request.routing_exception  # type: ignore[misc]
-    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\ctx.py", line 362, in match_request
-    result = self.url_adapter.match(return_rule=True)  # type: ignore
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\werkzeug\routing\map.py", line 629, in match
-    raise NotFound() from None
-werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
-ERROR:src:404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+  File "D:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Development\full-stack-2024\flask-rest-api\src\controllers\book_trans_controller.py", line 34, in create_transaction
+    result = trans_service.create(data)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Development\full-stack-2024\flask-rest-api\src\services\book_trans_service.py", line 66, in create
+    raise Exception(ex)
+Exception: 1054 (42S22): Unknown column 'rental_fees' in 'field list'
+ERROR:src:400 Bad Request: The browser (or proxy) sent a request that this server could not understand.
 Traceback (most recent call last):
-  File "D:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\app.py", line 880, in full_dispatch_request
+  File "d:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\werkzeug\wrappers\request.py", line 611, in get_json
+    rv = self.json_module.loads(data)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\json\provider.py", line 187, in loads
+    return json.loads(s, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.2032.0_x64__qbz5n2kfra8p0\Lib\json\__init__.py", line 346, in loads
+    return _default_decoder.decode(s)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.2032.0_x64__qbz5n2kfra8p0\Lib\json\decoder.py", line 337, in decode
+    obj, end = self.raw_decode(s, idx=_w(s, 0).end())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.2032.0_x64__qbz5n2kfra8p0\Lib\json\decoder.py", line 353, in raw_decode
+    obj, end = self.scan_once(s, idx)
+               ^^^^^^^^^^^^^^^^^^^^^^
+json.decoder.JSONDecodeError: Expecting ',' delimiter: line 8 column 1 (char 185)
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "d:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\wrappers.py", line 131, in on_json_loading_failed
+    return super().on_json_loading_failed(e)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\werkzeug\wrappers\request.py", line 645, in on_json_loading_failed
+    raise BadRequest(f"Failed to decode JSON object: {e}")
+werkzeug.exceptions.BadRequest: 400 Bad Request: Failed to decode JSON object: Expecting ',' delimiter: line 8 column 1 (char 185)
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "d:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\app.py", line 880, in full_dispatch_request
     rv = self.dispatch_request()
          ^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\app.py", line 854, in dispatch_request
-    self.raise_routing_exception(req)
-  File "D:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\app.py", line 463, in raise_routing_exception
-    raise request.routing_exception  # type: ignore[misc]
-    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\ctx.py", line 362, in match_request
-    result = self.url_adapter.match(return_rule=True)  # type: ignore
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\werkzeug\routing\map.py", line 629, in match
-    raise NotFound() from None
-werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+  File "d:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Development\full-stack-2024\flask-rest-api\src\controllers\book_trans_controller.py", line 33, in create_transaction
+    data = request.get_json()
+           ^^^^^^^^^^^^^^^^^^
+  File "d:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\werkzeug\wrappers\request.py", line 620, in get_json
+    rv = self.on_json_loading_failed(e)
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\wrappers.py", line 136, in on_json_loading_failed
+    raise BadRequest() from e
+werkzeug.exceptions.BadRequest: 400 Bad Request: The browser (or proxy) sent a request that this server could not understand.

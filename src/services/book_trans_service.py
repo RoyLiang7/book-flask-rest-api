@@ -6,23 +6,6 @@ class BookTransactionService(BaseService):
         super().__init__()  
 
 
-    def test_trans(self):
-        try:
-            self.dbcnx.start_transaction()
-
-            cursor = self.dbcnx.cursor()
-            cursor.execute("insert into book_categories (description) values (%s)", ('test category', ) )
-            cursor.execute("insert into book_types (description) values (%s)", ('test type', ) )
-
-            self.dbcnx.commit()
-
-        except Exception as ex:
-            self.dbcnx.rollback()
-            raise Exception(ex)
-        finally:
-            cursor.close()
-
-
     # --- implement abstract methods
     def get_all(self):
         cursor = self.dbcnx.cursor(dictionary=True)
@@ -45,7 +28,7 @@ class BookTransactionService(BaseService):
         cursor = self.dbcnx.cursor(dictionary=True)
 
         cursor.execute("""
-            select *
+            select t1.id as id, t3.id, t3.name, t3.email, t1.rent_days, t1.total_amt, t5.description, t6.description 
                 from book_trans_hdr t1
                     left join book_trans_detl t2 on t1.id = t2.hdr_id
                     left join users t3 on t1.user_id = t3.id
@@ -60,6 +43,15 @@ class BookTransactionService(BaseService):
         return result
 
     def create(self, data):
+        """
+        {
+            user_id: 1, rent_days: 6, total_amt: 99,
+            details:[
+                {book_id: 1, type_id: 2, rental_fee: 23, book_qty: 3},
+                {book_id: 1, type_id: 2, rental_fee: 23, book_qty: 3}
+            ]
+        }
+        """
         try:
             self.dbcnx.start_transaction()
             cursor = self.dbcnx.cursor()
@@ -70,11 +62,15 @@ class BookTransactionService(BaseService):
                            """, (data['user_id'], data['rent_days'], data['total_amt']))
             newHdrId = cursor.lastrowid
 
+
             # --- transaction details
             for detl in data['details']:
-                cursor.execute("""insert into book_detl (hdr_id, book_id, type_id, rental_fees, book_qty)
+                cursor.execute("""insert into book_trans_detlsss (hdr_id, book_id, type_id, rental_fee, book_qty)
                                     values (%s, %s, %s, %s, %s)
-                               """, (newHdrId, detl['book_id'], detl['type_id'], detl['rental_fees'], detl['book_qty']))
+                               """, (newHdrId, detl['book_id'], detl['type_id'], detl['rental_fee'], detl['book_qty']))
+                
+            # --- update user credit used
+            cursor.exeute("update user_credit set used_amt = user_amt + %s where user_id = %s", (data['total_amt'], data['user_id']))
             self.dbcnx.commit()            
 
             return newHdrId
@@ -141,4 +137,96 @@ class BookTransactionService(BaseService):
         cursor.close()
 
         return result
+    
+    
+    def get_late_books(self):
+        cursor = self.dbcnx.cursor(dictionary=True)
+
+        cursor.execute("""
+            select t2.id as trans_id, t2.user_id as user_id, t2.trans_date as trans_date, t1.book_id as book_id, t1.type_id as type_id, t1.book_qty as qty   
+                from book_trans_detl t1
+                    left join book_trans_hdr t2 on t1.hdr_id = t2.id
+                    left join books t3 on t1.book_id = t3.id
+                where t2.status = 1
+        """)
+        result = cursor.fetchall()
+        cursor.close()
+
+        return result
+    
+
+    def get_late_trans(self):
+        cursor = self.dbcnx.cursor(dictionary=True)
+
+        cursor.execute("""
+            select t1.id as trans_id, t1.user_id as user_id, t1.trans_date as trans_date, t2.id as detl.id, t2.book_id as book_id, t2.type_id as type_id, t2.book_qty as qty   
+                from book_trans_hdr t1
+                    left join book_trans_detl t2 on t1.id = t2.hdr_id
+                where t1.status = 1
+        """)
+
+        results = cursor.fetchall()
+        cursor.close()
+
+        # result =>
+        # [
+        #   {trans_id: 1, user_id: 1, trans_date: '2024-01-01', detl_id: 1, book_id: 1, type_id: 2, qty: 3},
+        #   {trans_id: 1, user_id: 1, trans_date: '2024-01-01', detl_id: 2, book_id: 2, type_id: 1, qty: 4},
+        #   {trans_id: 2, user_id: 1, trans_date: '2024-01-01', detl_id: 1, book_id: 2, type_id: 2, qty: 5}
+        # ]
+
+
+        # ------ convert return to dict with list for details {...., details:[.....]}
+        # ---- 1. simple for.next loop
+        data = []
+
+        for item in results:
+            # Check if the hdr_id already exists in the result
+            for entry in data:
+                if entry['trans_id'] == item['trans_id']:
+                    # If it exists, append the details
+                    details = {
+                        'detl_id' : item['detl_id'],
+                        'book_id' : item['book_id'],
+                        'type_id' : item['type_id'],
+                        'qty'     : item['qty']
+                    }
+                    entry['details'].append(details)
+
+                    break
+            else:
+                # If hdr_id does not exist, create a new entry
+                new_entry = {
+                    'hdr_id'    : item['hdr_id'],
+                    'trans_date': item['trans_date'],
+                    'details': [{
+                        'detl_id' : item['detl_id'],
+                        'book_id' : item['book_id'],
+                        'type_id' : item['type_id'],
+                        'qty'     : item['qty']
+                    }]
+                }
+                data.append(new_entry)
+
+
+        # ---- 2.
+        # grouped_data = {}
+        # for item in results:
+        #     if item['hdr_id'] not in grouped_data:
+        #         grouped_data[item['hdr_id']] = {
+        #             'hdr_id'    : item['hdr_id'],
+        #             'trans_date': item['trans_date'],
+        #             'details'   : []
+        #         }
+
+        #     grouped_data[item['hdr_id']]['details'].append({
+        #         'detl_id': item['detl_id'],
+        #         'book_id': item['book_id'],
+        #         'type_id': item['type_id'],
+        #         'qty'    : item['qty']
+        #     })
+        # data = list(grouped_data.values())
+
+
+        return data
     
