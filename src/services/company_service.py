@@ -1,7 +1,7 @@
 from src.services.base_service import BaseService
 
 
-class Company_Service(BaseService):
+class CompanySerbice(BaseService):
     def __init__(self):
         super().__init__()  # to gain access to parent objects
 

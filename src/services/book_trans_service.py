@@ -62,7 +62,6 @@ class BookTransactionService(BaseService):
     def create(self, data):
         try:
             self.dbcnx.start_transaction()
-
             cursor = self.dbcnx.cursor()
 
             # --- trasaction hdr
