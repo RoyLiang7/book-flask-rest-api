@@ -103,18 +103,8 @@ class BookTransactionService(BaseService):
         return affected_rows
 
 
-    def get_invoices(self):
-        cursor = self.dbcnx.cursor(dictionary=True)
 
-        cursor.execute("""
-            select t1.id as recipt_id, t1.inv_date as inv_date, t1.user_id as user_id, t2.name as name
-                from book_receipts t1
-                        left join users t2 on t1.user_id = t2.id
-                        left join book_trans_hdr t3 on t1.ref_id = t3.id
-        """)
-
-
-    # --- class methods
+    # --- implement class instance methods
     def get_by_date(self, start_date: str, end_date: str):
         cursor = self.dbcnx.cursor(dictionary=True)
 
@@ -199,32 +189,32 @@ class BookTransactionService(BaseService):
         # ---- 1. simple for.next loop
         data = []
 
-        for item in results:
-            # Check if the hdr_id already exists in the result
-            for entry in data:
-                if entry['hdr_id'] == item['hdr_id']:
-                    # If it exists, append the details
-                    details = {
-                        'detl_id' : item['detl_id'],
-                        'book_id' : item['book_id'],
-                        'type_id' : item['type_id'],
-                        'qty'     : item['qty']
-                    }
-                    entry['details'].append(details)
+        for trx in results:
+            # Check if the hdr_id al0ready exists in the result
+            # index = next((i for i, item in enumerate(data) if item['hdr_id'] == trx['hdr_id']), None)
+            index = [i for i, item in enumerate(data) if item['hdr_id'] == trx['hdr_id']]
+            if index:
+                # If it exists, append the details
+                details = {
+                    'detl_id' : trx['detl_id'],
+                    'book_id' : trx['book_id'],
+                    'type_id' : trx['type_id'],
+                    'qty'     : trx['qty']
+                }
 
-                    break
+                data[index[0]]['details'].append(details)
             else:
                 # If hdr_id does not exist, create a new entry
                 new_entry = {
-                    'hdr_id'    : item['hdr_id'],
-                    'trans_date': item['trans_date'],
-                    'user_id'   : item['user_id'],
-                    'rent_days' : item['rent_days'],
+                    'hdr_id'    : trx['hdr_id'],
+                    'trans_date': trx['trans_date'],
+                    'user_id'   : trx['user_id'],
+                    'rent_days' : trx['rent_days'],
                     'details': [{
-                        'detl_id' : item['detl_id'],
-                        'book_id' : item['book_id'],
-                        'type_id' : item['type_id'],
-                        'qty'     : item['qty']
+                        'detl_id' : trx['detl_id'],
+                        'book_id' : trx['book_id'],
+                        'type_id' : trx['type_id'],
+                        'qty'     : trx['qty']
                     }]
                 }
                 data.append(new_entry)
@@ -250,7 +240,6 @@ class BookTransactionService(BaseService):
 
 
         return data
-    
 
     def process_late_fees(self):
         late_trans = self.get_late_trans()
