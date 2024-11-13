@@ -14,6 +14,12 @@ def get_all():
 
     return jsonify(result)
 
+@trans_bp.route("/late", methods=['GET'])
+def get_late_all():
+    result = trans_service.get_late_trans()
+
+    return jsonify(result)
+
 @trans_bp.route("/id/<int:id>", methods=["GET"])
 def get_by_id(id):
     result = trans_service.get_by_id(id)
@@ -42,7 +48,12 @@ def cancel_trans():
 
     return jsonify(result), 200
    
+@trans_bp.route("/process", methods=['POST'])
+def process_late_fees():
+    result = trans_service.process_late_fees()
 
+    return jsonify(result), 200
+ 
 
 @trans_bp.route("/test", methods=["GET"])
 def test_trans():
