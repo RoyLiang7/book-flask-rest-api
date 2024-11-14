@@ -5,3 +5,7 @@ class BookType(Enum):
     SOFT_COVER = 2
     MAGAZINE = 3
     LETTERS = 4
+
+class TransType(Enum):
+    LATE_TRANS: 1
+    EARLY_TRANS: 2

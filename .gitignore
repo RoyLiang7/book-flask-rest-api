@@ -8,3 +8,5 @@ htmlcov/
 .tox/
 docs/_build/
 logs/
+*.rar
+logs/*.log

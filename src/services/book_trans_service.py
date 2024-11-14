@@ -1,6 +1,9 @@
 from datetime import datetime
 from src.services.base_service import BaseService
 
+from src.utilities.app_enum import BookType
+
+
 
 class BookTransactionService(BaseService):
     def __init__(self):
@@ -145,6 +148,10 @@ class BookTransactionService(BaseService):
     def get_late_trans(self):
         cursor = self.dbcnx.cursor(dictionary=True)
 
+        # SELECT id, trans_date,user_id, rent_days, DATEDIFF(NOW(), trans_date) 
+    	# FROM book_trans_hdr
+	    # WHERE DATEDIFF(NOW(), trans_date) > rent_days
+
         cursor.execute("""
             select t1.id as hdr_id, t1.user_id as user_id, t1.trans_date as trans_date, t1.rent_days as rent_days, t1.total_amt as total_amt,
                     t2.id as detl_id, t2.book_id as book_id, t2.type_id as type_id, t2.book_qty as qty   
@@ -153,14 +160,15 @@ class BookTransactionService(BaseService):
                     where t1.status = 1
         """)
 
-        results = cursor.fetchall()
+        sql_results = cursor.fetchall()
         cursor.close()
 
         # result =>
         # [
-        #   {hdr_id: 1, user_id: 1, trans_date: '2024-01-01', detl_id: 1, book_id: 1, type_id: 2, qty: 3},
-        #   {hdr_id: 1, user_id: 1, trans_date: '2024-01-01', detl_id: 2, book_id: 2, type_id: 1, qty: 4},
-        #   {hdr_id: 2, user_id: 1, trans_date: '2024-01-01', detl_id: 1, book_id: 2, type_id: 2, qty: 5}
+        #   {hdr_id: 1, user_id: 1, trans_date: '2024-11-02', rent_days: 7, total_amt = 96,  detl_id: 1, book_id: 2, type_id: 1, qty: 2},
+        #   {hdr_id: 1, user_id: 1, trans_date: '2024-11-02', rent_days: 7, total_amt = 96,  detl_id: 2, book_id: 3, type_id: 2, qty: 3},
+        #   {hdr_id: 2, user_id: 1, trans_date: '2024-11-04', rent_days: 3, total_amt = 320, detl_id: 3, book_id: 1, type_id: 2, qty: 1}
+        #   {hdr_id: 4, user_id: 2, trans_date: '2024-11-05', rent_days: 3, total_amt = 12,  detl_id: 8, book_id: 1, type_id: 2, qty: 5}
         # ]
 
 
@@ -189,7 +197,7 @@ class BookTransactionService(BaseService):
         # ---- 1. simple for.next loop
         data = []
 
-        for trx in results:
+        for trx in sql_results:
             # Check if the hdr_id al0ready exists in the result
             # index = next((i for i, item in enumerate(data) if item['hdr_id'] == trx['hdr_id']), None)
             index = [i for i, item in enumerate(data) if item['hdr_id'] == trx['hdr_id']]
@@ -260,13 +268,13 @@ class BookTransactionService(BaseService):
             fees = 0
             late_days = days_rented - trans['rent_days']
             for book in trans['details']:
-                if book['type_id'] == 1:            # hard cover
+                if book['type_id'] == BookType.HARD_COVER:
                     fees += late_days * 1.20
-                elif book['type_id'] == 2:          # soft cover
+                elif book['type_id'] == BookType.SOFT_COVER:
                     fees += late_days * 1.20
-                elif book['type_id'] == 3:          # magazine
+                elif book['type_id'] == BookType.MAGAZINE:
                     fees += late_days * 1.20
-                else:                               # letters
+                else:
                     fees += late_days * 1.20
                            
             late_list.append({
