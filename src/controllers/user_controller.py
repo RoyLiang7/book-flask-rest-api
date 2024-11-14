@@ -1,6 +1,7 @@
 import datetime
-
 from flask import Blueprint, jsonify, request
+from flask_jwt_extended import jwt_required
+
 from src.services.user_service import UserService
 
 
@@ -9,12 +10,14 @@ user_srv = UserService()
 
 
 @user_bp.route("/", methods=["GET"])
+@jwt_required()
 def get_all():
     result = user_srv.get_all()
 
     return jsonify(result), 200
 
 @user_bp.route("/id/<int:id>", methods=["GET"])
+@jwt_required()
 def get_by_id(id):
     result = user_srv.get_by_id(id)
 
@@ -59,5 +62,20 @@ def insert():
 @user_bp.route("/<int:id>", methods=["DELETE"])
 def delete(id):
     result = user_srv.delete(id)
+
+    return jsonify(result), 200
+
+
+
+@user_bp.route("/token", methods=["POST"])
+def get_token():
+    data = request.get_json()
+    result = user_srv.get_token(data)
+
+    return jsonify(result), 200
+
+@user_bp.route("/hash/<string:pwd>", methods=["GET"])
+def get_hash(pwd):
+    result = user_srv.get_hash(pwd)
 
     return jsonify(result), 200

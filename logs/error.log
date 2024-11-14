@@ -1,4 +1,4 @@
-ERROR:src:strptime() argument 1 must be str, not datetime.datetime
+ERROR:src:Object of type Response is not JSON serializable
 Traceback (most recent call last):
   File "d:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\app.py", line 880, in full_dispatch_request
     rv = self.dispatch_request()
@@ -6,288 +6,27 @@ Traceback (most recent call last):
   File "d:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\app.py", line 865, in dispatch_request
     return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\Development\full-stack-2024\flask-rest-api\src\controllers\book_trans_controller.py", line 53, in process_late_fees
-    result = trans_service.process_late_fees()
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\Development\full-stack-2024\flask-rest-api\src\services\book_trans_service.py", line 259, in process_late_fees
-    trans_date = datetime.strptime(trans['trans_date'], '%Y-%m-%d %H:%M:%S')
-                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-TypeError: strptime() argument 1 must be str, not datetime.datetime
-ERROR:src:404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
-Traceback (most recent call last):
-  File "d:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\app.py", line 880, in full_dispatch_request
-    rv = self.dispatch_request()
-         ^^^^^^^^^^^^^^^^^^^^^^^
-  File "d:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\app.py", line 854, in dispatch_request
-    self.raise_routing_exception(req)
-  File "d:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\app.py", line 463, in raise_routing_exception
-    raise request.routing_exception  # type: ignore[misc]
-    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "d:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\ctx.py", line 362, in match_request
-    result = self.url_adapter.match(return_rule=True)  # type: ignore
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "d:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\werkzeug\routing\map.py", line 629, in match
-    raise NotFound() from None
-werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
-ERROR:src:404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
-Traceback (most recent call last):
-  File "d:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\app.py", line 880, in full_dispatch_request
-    rv = self.dispatch_request()
-         ^^^^^^^^^^^^^^^^^^^^^^^
-  File "d:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\app.py", line 854, in dispatch_request
-    self.raise_routing_exception(req)
-  File "d:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\app.py", line 463, in raise_routing_exception
-    raise request.routing_exception  # type: ignore[misc]
-    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "d:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\ctx.py", line 362, in match_request
-    result = self.url_adapter.match(return_rule=True)  # type: ignore
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "d:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\werkzeug\routing\map.py", line 629, in match
-    raise NotFound() from None
-werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
-ERROR:src:Unread result found
-Traceback (most recent call last):
-  File "d:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\app.py", line 880, in full_dispatch_request
-    rv = self.dispatch_request()
-         ^^^^^^^^^^^^^^^^^^^^^^^
-  File "d:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\app.py", line 865, in dispatch_request
-    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\Development\full-stack-2024\flask-rest-api\src\controllers\book_trans_controller.py", line 25, in get_by_id
-    result = trans_service.get_by_id(id)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\Development\full-stack-2024\flask-rest-api\src\services\book_trans_service.py", line 43, in get_by_id
-    cursor.close()
-  File "d:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\mysql\connector\cursor_cext.py", line 521, in close
-    self._connection.handle_unread_result()
-  File "d:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\mysql\connector\connection_cext.py", line 1047, in handle_unread_result
-    raise InternalError("Unread result found")
-mysql.connector.errors.InternalError: Unread result found
-ERROR:src:Unread result found
-Traceback (most recent call last):
-  File "d:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\app.py", line 880, in full_dispatch_request
-    rv = self.dispatch_request()
-         ^^^^^^^^^^^^^^^^^^^^^^^
-  File "d:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\app.py", line 865, in dispatch_request
-    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\Development\full-stack-2024\flask-rest-api\src\controllers\book_trans_controller.py", line 25, in get_by_id
-    result = trans_service.get_by_id(id)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\Development\full-stack-2024\flask-rest-api\src\services\book_trans_service.py", line 43, in get_by_id
-    cursor.close()
-  File "d:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\mysql\connector\cursor_cext.py", line 521, in close
-    self._connection.handle_unread_result()
-  File "d:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\mysql\connector\connection_cext.py", line 1047, in handle_unread_result
-    raise InternalError("Unread result found")
-mysql.connector.errors.InternalError: Unread result found
-ERROR:src:405 Method Not Allowed: The method is not allowed for the requested URL.
-Traceback (most recent call last):
-  File "D:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\app.py", line 880, in full_dispatch_request
-    rv = self.dispatch_request()
-         ^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\app.py", line 854, in dispatch_request
-    self.raise_routing_exception(req)
-  File "D:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\app.py", line 463, in raise_routing_exception
-    raise request.routing_exception  # type: ignore[misc]
-    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\ctx.py", line 362, in match_request
-    result = self.url_adapter.match(return_rule=True)  # type: ignore
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\werkzeug\routing\map.py", line 624, in match
-    raise MethodNotAllowed(valid_methods=list(e.have_match_for)) from None
-werkzeug.exceptions.MethodNotAllowed: 405 Method Not Allowed: The method is not allowed for the requested URL.
-ERROR:src:404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
-Traceback (most recent call last):
-  File "D:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\app.py", line 880, in full_dispatch_request
-    rv = self.dispatch_request()
-         ^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\app.py", line 854, in dispatch_request
-    self.raise_routing_exception(req)
-  File "D:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\app.py", line 463, in raise_routing_exception
-    raise request.routing_exception  # type: ignore[misc]
-    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\ctx.py", line 362, in match_request
-    result = self.url_adapter.match(return_rule=True)  # type: ignore
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\werkzeug\routing\map.py", line 629, in match
-    raise NotFound() from None
-werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
-ERROR:src:'user_id'
-Traceback (most recent call last):
-  File "D:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\app.py", line 880, in full_dispatch_request
-    rv = self.dispatch_request()
-         ^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\app.py", line 865, in dispatch_request
-    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\Development\full-stack-2024\flask-rest-api\src\controllers\book_trans_controller.py", line 53, in process_late_fees
-    result = trans_service.process_late_fees()
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\Development\full-stack-2024\flask-rest-api\src\services\book_trans_service.py", line 284, in process_late_fees
-    "user_id": trans['user_id'],
-               ~~~~~^^^^^^^^^^^
-KeyError: 'user_id'
-ERROR:src:list index out of range
-Traceback (most recent call last):
-  File "d:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\app.py", line 880, in full_dispatch_request
-    rv = self.dispatch_request()
-         ^^^^^^^^^^^^^^^^^^^^^^^
-  File "d:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\app.py", line 865, in dispatch_request
-    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\Development\full-stack-2024\flask-rest-api\src\controllers\book_trans_controller.py", line 19, in get_late_all
-    result = trans_service.get_late_trans()
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\Development\full-stack-2024\flask-rest-api\src\services\book_trans_service.py", line 203, in get_late_trans
-    data[item['hdr_id']]['details'].append(details)
-    ~~~~^^^^^^^^^^^^^^^^
-IndexError: list index out of range
-ERROR:src:404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
-Traceback (most recent call last):
-  File "d:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\app.py", line 880, in full_dispatch_request
-    rv = self.dispatch_request()
-         ^^^^^^^^^^^^^^^^^^^^^^^
-  File "d:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\app.py", line 854, in dispatch_request
-    self.raise_routing_exception(req)
-  File "d:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\app.py", line 463, in raise_routing_exception
-    raise request.routing_exception  # type: ignore[misc]
-    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "d:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\ctx.py", line 362, in match_request
-    result = self.url_adapter.match(return_rule=True)  # type: ignore
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "d:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\werkzeug\routing\map.py", line 629, in match
-    raise NotFound() from None
-werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
-ERROR:src:'id'
-Traceback (most recent call last):
-  File "d:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\app.py", line 880, in full_dispatch_request
-    rv = self.dispatch_request()
-         ^^^^^^^^^^^^^^^^^^^^^^^
-  File "d:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\app.py", line 865, in dispatch_request
-    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\Development\full-stack-2024\flask-rest-api\src\controllers\book_trans_controller.py", line 19, in get_late_all
-    result = trans_service.get_late_trans()
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\Development\full-stack-2024\flask-rest-api\src\services\book_trans_service.py", line 194, in get_late_trans
-    index = next((i for i, item in enumerate(results) if item['id'] == target_id), None)
-            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\Development\full-stack-2024\flask-rest-api\src\services\book_trans_service.py", line 194, in <genexpr>
-    index = next((i for i, item in enumerate(results) if item['id'] == target_id), None)
-                                                         ~~~~^^^^^^
-KeyError: 'id'
-ERROR:src:404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
-Traceback (most recent call last):
-  File "d:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\app.py", line 880, in full_dispatch_request
-    rv = self.dispatch_request()
-         ^^^^^^^^^^^^^^^^^^^^^^^
-  File "d:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\app.py", line 854, in dispatch_request
-    self.raise_routing_exception(req)
-  File "d:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\app.py", line 463, in raise_routing_exception
-    raise request.routing_exception  # type: ignore[misc]
-    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "d:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\ctx.py", line 362, in match_request
-    result = self.url_adapter.match(return_rule=True)  # type: ignore
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "d:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\werkzeug\routing\map.py", line 629, in match
-    raise NotFound() from None
-werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
-ERROR:src:'id'
-Traceback (most recent call last):
-  File "d:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\app.py", line 880, in full_dispatch_request
-    rv = self.dispatch_request()
-         ^^^^^^^^^^^^^^^^^^^^^^^
-  File "d:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\app.py", line 865, in dispatch_request
-    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\Development\full-stack-2024\flask-rest-api\src\controllers\book_trans_controller.py", line 19, in get_late_all
-    result = trans_service.get_late_trans()
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\Development\full-stack-2024\flask-rest-api\src\services\book_trans_service.py", line 194, in get_late_trans
-    index = next((i for i, item in enumerate(results) if item['id'] == trx['hdr_id']), None)
-            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\Development\full-stack-2024\flask-rest-api\src\services\book_trans_service.py", line 194, in <genexpr>
-    index = next((i for i, item in enumerate(results) if item['id'] == trx['hdr_id']), None)
-                                                         ~~~~^^^^^^
-KeyError: 'id'
-ERROR:src:404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
-Traceback (most recent call last):
-  File "d:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\app.py", line 880, in full_dispatch_request
-    rv = self.dispatch_request()
-         ^^^^^^^^^^^^^^^^^^^^^^^
-  File "d:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\app.py", line 854, in dispatch_request
-    self.raise_routing_exception(req)
-  File "d:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\app.py", line 463, in raise_routing_exception
-    raise request.routing_exception  # type: ignore[misc]
-    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "d:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\ctx.py", line 362, in match_request
-    result = self.url_adapter.match(return_rule=True)  # type: ignore
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "d:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\werkzeug\routing\map.py", line 629, in match
-    raise NotFound() from None
-werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
-ERROR:src:404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
-Traceback (most recent call last):
-  File "d:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\app.py", line 880, in full_dispatch_request
-    rv = self.dispatch_request()
-         ^^^^^^^^^^^^^^^^^^^^^^^
-  File "d:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\app.py", line 854, in dispatch_request
-    self.raise_routing_exception(req)
-  File "d:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\app.py", line 463, in raise_routing_exception
-    raise request.routing_exception  # type: ignore[misc]
-    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "d:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\ctx.py", line 362, in match_request
-    result = self.url_adapter.match(return_rule=True)  # type: ignore
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "d:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\werkzeug\routing\map.py", line 629, in match
-    raise NotFound() from None
-werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
-ERROR:src:404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
-Traceback (most recent call last):
-  File "d:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\app.py", line 880, in full_dispatch_request
-    rv = self.dispatch_request()
-         ^^^^^^^^^^^^^^^^^^^^^^^
-  File "d:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\app.py", line 854, in dispatch_request
-    self.raise_routing_exception(req)
-  File "d:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\app.py", line 463, in raise_routing_exception
-    raise request.routing_exception  # type: ignore[misc]
-    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "d:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\ctx.py", line 362, in match_request
-    result = self.url_adapter.match(return_rule=True)  # type: ignore
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "d:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\werkzeug\routing\map.py", line 629, in match
-    raise NotFound() from None
-werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
-ERROR:src:404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
-Traceback (most recent call last):
-  File "d:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\app.py", line 880, in full_dispatch_request
-    rv = self.dispatch_request()
-         ^^^^^^^^^^^^^^^^^^^^^^^
-  File "d:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\app.py", line 854, in dispatch_request
-    self.raise_routing_exception(req)
-  File "d:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\app.py", line 463, in raise_routing_exception
-    raise request.routing_exception  # type: ignore[misc]
-    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "d:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\ctx.py", line 362, in match_request
-    result = self.url_adapter.match(return_rule=True)  # type: ignore
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "d:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\werkzeug\routing\map.py", line 629, in match
-    raise NotFound() from None
-werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
-ERROR:src:404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
-Traceback (most recent call last):
-  File "d:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\app.py", line 880, in full_dispatch_request
-    rv = self.dispatch_request()
-         ^^^^^^^^^^^^^^^^^^^^^^^
-  File "d:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\app.py", line 854, in dispatch_request
-    self.raise_routing_exception(req)
-  File "d:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\app.py", line 463, in raise_routing_exception
-    raise request.routing_exception  # type: ignore[misc]
-    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "d:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\ctx.py", line 362, in match_request
-    result = self.url_adapter.match(return_rule=True)  # type: ignore
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "d:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\werkzeug\routing\map.py", line 629, in match
-    raise NotFound() from None
-werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+  File "D:\Development\full-stack-2024\flask-rest-api\src\controllers\user_controller.py", line 72, in get_token
+    return jsonify(result), 200
+           ^^^^^^^^^^^^^^^
+  File "d:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\json\__init__.py", line 170, in jsonify
+    return current_app.json.response(*args, **kwargs)  # type: ignore[return-value]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\json\provider.py", line 214, in response
+    f"{self.dumps(obj, **dump_args)}\n", mimetype=self.mimetype
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "d:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\json\provider.py", line 179, in dumps
+    return json.dumps(obj, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.2032.0_x64__qbz5n2kfra8p0\Lib\json\__init__.py", line 238, in dumps
+    **kw).encode(obj)
+          ^^^^^^^^^^^
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.2032.0_x64__qbz5n2kfra8p0\Lib\json\encoder.py", line 200, in encode
+    chunks = self.iterencode(o, _one_shot=True)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.2032.0_x64__qbz5n2kfra8p0\Lib\json\encoder.py", line 258, in iterencode
+    return _iterencode(o, 0)
+           ^^^^^^^^^^^^^^^^^
+  File "d:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\json\provider.py", line 121, in _default
+    raise TypeError(f"Object of type {type(o).__name__} is not JSON serializable")
+TypeError: Object of type Response is not JSON serializable

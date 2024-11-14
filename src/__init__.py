@@ -58,6 +58,16 @@ app.config['BASIC_AUTH_PASSWORD'] = config['BASIC_AUTH']['PASSWORD']
 
 
 
+
+# ======================= e n c r y p t i o n ========================= #
+# ---- https://flask-bcrypt.readthedocs.io/en/1.0.1/#usage
+from flask_bcrypt import Bcrypt
+
+bcrypt = Bcrypt(app)
+
+
+
+
 # ========================= r o u t i n g ============================= #
 # ---- https://realpython.com/flask-blueprint/
 
@@ -76,6 +86,30 @@ app.register_blueprint(type_bp,  url_prefix="/book/type")
 app.register_blueprint(cat_bp,   url_prefix="/book/category")
 
 app.register_blueprint(trans_bp, url_prefix="/book/transaction")
+
+
+
+# ======================= j w t   m a n a g e r ====================== #
+# JWT Initialization
+from flask_jwt_extended import JWTManager
+
+jwt = JWTManager(app)
+
+# -- overrides
+# @jwt.additional_claims_loader           # generally used for authorisation
+# def add_claims_to_jwt(identity):
+#     if identity["role_id"] == 1:
+#         return {"is_admin": True}
+#     return {"is_admin": False}
+
+# @jwt.expired_token_loader               # generally used to clear used token or logging purposes
+# def expired_token_callback(jwt_header, jwt_payload):
+#     return (
+#         jsonify({"message": "The token has expired.", "error": "token_expired"}), 401
+#     )
+
+
+
 
 
 

@@ -1,4 +1,8 @@
+from flask import jsonify
+from flask_jwt_extended import create_access_token
+
 from src.services.base_service import BaseService
+from src import bcrypt
 
 
 class UserService(BaseService):
@@ -33,10 +37,11 @@ class UserService(BaseService):
         return result
 
     def create(self, model):
-        cursor = self.dbcnx.cursor()
+        pw_hash = bcrypt.generate_password_hash(model['password']).decode('utf-8')
 
+        cursor = self.dbcnx.cursor()
         cursor.execute("insert into users (name, email, role_id, company_id, password) values (%s, %s, %s, %s, %s)", 
-                                (model['name'], model['email'], model['role_id'], model['company_id'], model['password']))
+                                (model['name'], model['email'], model['role_id'], model['company_id'], pw_hash))
 
         newId = cursor.lastrowid
         self.dbcnx.commit()     # important !!!!
@@ -106,3 +111,29 @@ class UserService(BaseService):
         cursor.close()
 
         return response
+
+
+    def authenticate(self, data):
+        cursor = self.dbcnx.cursor(dictionary=True)
+        cursor.execute("select id, name, email, password, status from users where email = %s", (data["email"],))
+        result = cursor.fetchone()
+        cursor.close()
+
+        if result:
+            pw_hash = bcrypt.generate_password_hash(data['password']).decode('utf-8')
+            if result['password'] == pw_hash:
+                return result
+            
+        return None
+    
+    def get_token(self, data):
+        user = self.authenticate(data)
+        if not user:
+            return jsonify({"msg": "Bad email or password"}), 401
+
+        access_token = create_access_token(identity=user)
+        return jsonify({"access_token": access_token, "user": user})
+
+    def get_hash(self, pwd):
+        pw_hash = bcrypt.generate_password_hash(pwd).decode('utf-8')
+        return pw_hash
