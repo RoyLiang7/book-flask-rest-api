@@ -113,6 +113,7 @@ class UserService(BaseService):
         return response
 
 
+
     def authenticate(self, data):
         cursor = self.dbcnx.cursor(dictionary=True)
         cursor.execute("select id, name, email, password, status from users where email = %s", (data["email"],))
@@ -129,10 +130,10 @@ class UserService(BaseService):
     def get_token(self, data):
         user = self.authenticate(data)
         if not user:
-            return jsonify({"msg": "Bad email or password"}), 401
+            return {"msg": "Bad email or password"}
 
         access_token = create_access_token(identity=user)
-        return jsonify({"access_token": access_token, "user": user})
+        return {"access_token": access_token, "user": user}
 
     def get_hash(self, pwd):
         pw_hash = bcrypt.generate_password_hash(pwd).decode('utf-8')

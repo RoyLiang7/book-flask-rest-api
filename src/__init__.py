@@ -62,8 +62,11 @@ app.config['BASIC_AUTH_PASSWORD'] = config['BASIC_AUTH']['PASSWORD']
 # ======================= e n c r y p t i o n ========================= #
 # ---- https://flask-bcrypt.readthedocs.io/en/1.0.1/#usage
 from flask_bcrypt import Bcrypt
-
 bcrypt = Bcrypt(app)
+
+# =============== b a s i c   a u t h   m a n a g e r ================ #
+from flask_basicauth import BasicAuth
+basic_auth = BasicAuth(app)
 
 
 
@@ -86,6 +89,7 @@ app.register_blueprint(type_bp,  url_prefix="/book/type")
 app.register_blueprint(cat_bp,   url_prefix="/book/category")
 
 app.register_blueprint(trans_bp, url_prefix="/book/transaction")
+
 
 
 
@@ -113,6 +117,7 @@ jwt = JWTManager(app)
 
 
 
+
 # ========================= l o g g i n g ============================== #
 # ---- https://docs.python.org/3/library/logging.handlers.html
 # ---- https://docs.python-guide.org/writing/logging/
@@ -130,6 +135,7 @@ handler.setFormatter(logging.Formatter(log_format_2))
 # 
 logger = logging.getLogger(__name__)
 logger.addHandler(handler)
+
 
 
 

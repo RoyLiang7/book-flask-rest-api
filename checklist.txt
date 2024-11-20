@@ -134,6 +134,7 @@ main (src/__init__.py)
 
 
 # ===== p a s s w o r d   e n c r y p t i o n
+
     ---- 0. pip install flask-bcrypt
     ---- 1. setup
             a. initialize bcrypt from flask_bcrypt in __init__.py
@@ -146,6 +147,7 @@ main (src/__init__.py)
 
 
 # ===================== a u t h e n t i c a t i o n   (j w t) ======================== #
+
     ---- 0. installation
             a. flask-jwt-extended
     ---- 1. setup
@@ -169,6 +171,7 @@ main (src/__init__.py)
 
 
 # ===== a u t h e n t i c a t i o n   (b a s i c) / c u s t o m   p a c k a g e ====== #
+
     ---- 0. custom module
             a. flask-basicauth library has some issues ********
     ---- 1. creation
@@ -199,6 +202,21 @@ main (src/__init__.py)
 
 
 
+# =========================== a s y n c   f l a s k ================================= #
+
+
+
+
+
+
+
+# ===================== r e q u e s t s / h t t p x ================== #
+
+
+
+
+
+
 
 # ========================= a s y n c h r o n i c i t y ============================== #
 # ---- https://flask.palletsprojects.com/en/stable/async-await/
@@ -209,7 +227,6 @@ main (src/__init__.py)
 
 
 
-# ===================== r e q u e s t s / h t t p x ================== #
 
 
 
