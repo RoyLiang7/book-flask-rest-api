@@ -9,12 +9,21 @@
 
 
 import os
-from flask import Flask
+from flask import Flask, send_from_directory
 
 
 # ======================== f l a s k   a p p ======================= #
 app = Flask(__name__)
 
+
+# # -----
+# @app.before_request
+# async def before_request_async():
+#     print("before_request_async")
+# @app.teardown_appcontext
+# async def teardown_request_async(exception):
+#     print("context_teardown")
+# # -----
 
 
 # =============== c o n f i g u r a t i o n   f i l e =============== #
@@ -58,25 +67,17 @@ app.config['BASIC_AUTH_PASSWORD'] = config['BASIC_AUTH']['PASSWORD']
 
 
 
-# ========================= r o u t i n g ============================= #
+# ========================= r o u t i n g ============================== #
 # ---- https://realpython.com/flask-blueprint/
 
-from src.controllers.user_controller           import user_bp
-from src.controllers.role_controller           import role_bp
-from src.controllers.book_controller           import book_bp
-from src.controllers.book_trans_controller     import trans_bp
-from src.controllers.book_category_controller  import cat_bp
-from src.controllers.book_type_controller      import type_bp
 
-app.register_blueprint(user_bp,  url_prefix="/book/user")
-app.register_blueprint(role_bp,  url_prefix="/book/role")
+# from src.controllers.user_controller_async import user_async_bp
+# app.register_blueprint(user_async_bp, url_prefix="/user")
 
-app.register_blueprint(book_bp,  url_prefix="/book")
-app.register_blueprint(type_bp,  url_prefix="/book/type")
-app.register_blueprint(cat_bp,   url_prefix="/book/category")
-
-app.register_blueprint(trans_bp, url_prefix="/book/transaction")
-
+@app.route('/favicon.ico')
+def favicon():
+    return send_from_directory(os.path.join(app.root_path, ''),
+                               'favicon.ico', mimetype='image/vnd.microsoft.icon')
 
 
 # ========================= l o g g i n g ============================== #

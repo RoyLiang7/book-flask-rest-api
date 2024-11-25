@@ -1,61 +1,47 @@
 from src.services.base_service import BaseService
+from mysql.connector.aio import connect
 
-
-class RoleService(BaseService):
-
+class TestService(BaseService):
+    
     def __init__(self):
-        super().__init__()  # to gain access to parent objects
+        super().__init__() 
 
+    async def get_all(self):
+        async with await self.dbcnx.connect() as cnx:
+            async with await cnx.cursor() as cur:
+                await cur.execute("select id, descriptions from roles")
+                results = await cur.fetchall()
 
-    # --- implement abstract methods
-    def get_all(self):
-        cursor = self.dbcnx.cursor(dictionary=True)
+                return results    
 
-        cursor.execute("select id, name from roles")
-        result = cursor.fetchall()
-        cursor.close()
+    async def get_by_id(self, id):
+        async with await self.dbcnx.connect() as cnx:
+            async with await cnx.cursor() as cur:
+                await cur.execute("select id, descriptions from roles where id = %s", (id,))
+                results = await cur.fetchall()
 
-        return result
+                return results    
+                
+    async def create(self, model):
+        async with await self.dbcnx.connect() as cnx:
+            async with await cnx.cursor() as cur:
+                await cur.execute("insert into roles (descriptions) values (%s)", (model["descriptions"],))
+                result = await cur.lastrowid
 
-    def get_by_id(self, id):
-        cursor = self.dbcnx.cursor(dictionary=True)
+                return result
+    
+    async def update(self, model):
+        async with await self.dbcnx.connect() as cnx:
+            async with await cnx.cursor() as cur:
+                await cur.execute("update roles set descriptions = %s", (model["descriptions"],))
+                result = await cur.rowcount
 
-        result = cursor.execute("select id, name from roles where id = %s", (id,))
-        result = cursor.fetchone()
-        cursor.close()
+                return result    
+    
+    async def delete(self, id):
+        async with await self.dbcnx.connect() as cnx:
+            async with await cnx.cursor() as cur:
+                await cur.execute("delete roles where id = %s", (id,))
+                result = await cur.rowcount
 
-        return result
-
-    def create(self, data):
-        cursor = self.dbcnx.cursor()
-
-        name = data['name']
-
-        cursor.execute("insert into roles (name) values (%s)", (name))
-        newId = cursor.lastrowid
-        self.dbcnx.commit()
-        cursor.close()
-
-        return newId
-
-    def update(self, data):
-        cursor = self.dbcnx.cursor()
-
-        id = data['id'] ; name = data['name']
-
-        cursor.execute("update roles set name = %s where id = %s", (name, id))
-        affected_rows = cursor.rowcount
-        self.dbcnx.commit()
-        cursor.close()
-
-        return affected_rows
-
-    def delete(self, id):
-        cursor = self.dbcnx.cursor()
-
-        cursor.execute("delete from users where id = %s", (id,))
-        affected_rows = cursor.rowcount
-        self.dbcnx.commit()
-        cursor.close()
-
-        return affected_rows
+                return result    

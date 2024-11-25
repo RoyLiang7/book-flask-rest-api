@@ -6,7 +6,7 @@
 
 
 
-# ============================= c o n v e n t i o n s ============================= #
+# ========================== c o n v e n t i o n s ========================== #
 folder setup
 ============
     /book-rental-app
@@ -36,7 +36,7 @@ imports
 
 
 
-# =========================== f i r s t   i t e r a t i o n ======================= #
+# ======================== f i r s t   i t e r a t i o n ===================== #
 # ======== f l a s k   r e s t   a p i
 structure
 =========
@@ -107,8 +107,8 @@ modules / packages ***** note::: all return values
 
 
 
-# =========================== s e c o n d   i t e r a t i o n ======================= #
-# ======== l o g g i n g   &   e x c e p t i o n   h a n d l i n g
+# ========================== s e c o n d   i t e r a t i o n ===================== #
+# =========== l o g g i n g   &   e x c e p t i o n   h a n d l i n g ============ #
 main (src/__init__.py)
 ======================
     ---- 1. Logging
@@ -124,7 +124,7 @@ main (src/__init__.py)
 
 
 
-# ========================== t h i r d   i t e r a t i o n =========================== #
+# ======================= t h i r d   i t e r a t i o n ========================== #
 # --- https://obikastanya.medium.com/ultimate-guide-to-securing-your-application-with-jwt-best-practices-and-tips-6054fd21e638
 # --- https://rest-apis-flask.teclado.com/docs/flask_jwt_extended/jwt_claims_and_authorization/
 # --- https://flask-jwt-extended.readthedocs.io/en/stable/basic_usage.html
@@ -145,7 +145,7 @@ main (src/__init__.py)
                 -- compare user password from table with hashed login password
 
 
-# ===================== a u t h e n t i c a t i o n   (j w t) ======================== #
+# ==================== a u t h e n t i c a t i o n   (j w t) ===================== #
     ---- 0. installation
             a. flask-jwt-extended
     ---- 1. setup
@@ -168,7 +168,7 @@ main (src/__init__.py)
 
 
 
-# ===== a u t h e n t i c a t i o n   (b a s i c) / c u s t o m   p a c k a g e ====== #
+# ===== a u t h e n t i c a t i o n   b a s i c / c u s t o m   p a c k a g e ====== #
     ---- 0. custom module
             a. flask-basicauth library has some issues ********
     ---- 1. creation
@@ -199,8 +199,7 @@ main (src/__init__.py)
 
 
 
-
-# ========================= a s y n c h r o n i c i t y ============================== #
+# ========================== a s y n c h r o n i c i t y ============================ #
 # ---- https://flask.palletsprojects.com/en/stable/async-await/
 # ---- https://dev.mysql.com/doc/connector-python/en/connector-python-asyncio.html
 # ---- https://blogs.oracle.com/mysql/post/mysql-async-connectivity-with-connector-python
@@ -209,12 +208,12 @@ main (src/__init__.py)
 
 
 
-# ===================== r e q u e s t s / h t t p x ================== #
+# ============================ r e q u e s t s / h t t p x =========================== #
+# ---- 
 
 
 
 
-
-# ===================== f i n e   t u n i n g ======================= #
+# ============================== f i n e   t u n i n g =============================== #
 # ---- https://medium.com/@joseleonsalgado/building-scalable-apis-with-flask-best-practices-for-software-engineers-c4305a687ed6
 

@@ -1,102 +1,49 @@
-ERROR:src:strptime() argument 1 must be str, not datetime.datetime
-Traceback (most recent call last):
-  File "d:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\app.py", line 880, in full_dispatch_request
-    rv = self.dispatch_request()
-         ^^^^^^^^^^^^^^^^^^^^^^^
-  File "d:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\app.py", line 865, in dispatch_request
-    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\Development\full-stack-2024\flask-rest-api\src\controllers\book_trans_controller.py", line 53, in process_late_fees
-    result = trans_service.process_late_fees()
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\Development\full-stack-2024\flask-rest-api\src\services\book_trans_service.py", line 259, in process_late_fees
-    trans_date = datetime.strptime(trans['trans_date'], '%Y-%m-%d %H:%M:%S')
-                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-TypeError: strptime() argument 1 must be str, not datetime.datetime
-ERROR:src:404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
-Traceback (most recent call last):
-  File "d:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\app.py", line 880, in full_dispatch_request
-    rv = self.dispatch_request()
-         ^^^^^^^^^^^^^^^^^^^^^^^
-  File "d:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\app.py", line 854, in dispatch_request
-    self.raise_routing_exception(req)
-  File "d:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\app.py", line 463, in raise_routing_exception
-    raise request.routing_exception  # type: ignore[misc]
-    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "d:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\ctx.py", line 362, in match_request
-    result = self.url_adapter.match(return_rule=True)  # type: ignore
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "d:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\werkzeug\routing\map.py", line 629, in match
-    raise NotFound() from None
-werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
-ERROR:src:404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
-Traceback (most recent call last):
-  File "d:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\app.py", line 880, in full_dispatch_request
-    rv = self.dispatch_request()
-         ^^^^^^^^^^^^^^^^^^^^^^^
-  File "d:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\app.py", line 854, in dispatch_request
-    self.raise_routing_exception(req)
-  File "d:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\app.py", line 463, in raise_routing_exception
-    raise request.routing_exception  # type: ignore[misc]
-    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "d:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\ctx.py", line 362, in match_request
-    result = self.url_adapter.match(return_rule=True)  # type: ignore
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "d:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\werkzeug\routing\map.py", line 629, in match
-    raise NotFound() from None
-werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
-ERROR:src:Unread result found
-Traceback (most recent call last):
-  File "d:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\app.py", line 880, in full_dispatch_request
-    rv = self.dispatch_request()
-         ^^^^^^^^^^^^^^^^^^^^^^^
-  File "d:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\app.py", line 865, in dispatch_request
-    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\Development\full-stack-2024\flask-rest-api\src\controllers\book_trans_controller.py", line 25, in get_by_id
-    result = trans_service.get_by_id(id)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\Development\full-stack-2024\flask-rest-api\src\services\book_trans_service.py", line 43, in get_by_id
-    cursor.close()
-  File "d:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\mysql\connector\cursor_cext.py", line 521, in close
-    self._connection.handle_unread_result()
-  File "d:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\mysql\connector\connection_cext.py", line 1047, in handle_unread_result
-    raise InternalError("Unread result found")
-mysql.connector.errors.InternalError: Unread result found
-ERROR:src:Unread result found
-Traceback (most recent call last):
-  File "d:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\app.py", line 880, in full_dispatch_request
-    rv = self.dispatch_request()
-         ^^^^^^^^^^^^^^^^^^^^^^^
-  File "d:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\app.py", line 865, in dispatch_request
-    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\Development\full-stack-2024\flask-rest-api\src\controllers\book_trans_controller.py", line 25, in get_by_id
-    result = trans_service.get_by_id(id)
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\Development\full-stack-2024\flask-rest-api\src\services\book_trans_service.py", line 43, in get_by_id
-    cursor.close()
-  File "d:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\mysql\connector\cursor_cext.py", line 521, in close
-    self._connection.handle_unread_result()
-  File "d:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\mysql\connector\connection_cext.py", line 1047, in handle_unread_result
-    raise InternalError("Unread result found")
-mysql.connector.errors.InternalError: Unread result found
-ERROR:src:405 Method Not Allowed: The method is not allowed for the requested URL.
+ERROR:src:Task <Task pending name='Task-13' coro=<AsyncToSync.main_wrap() running at D:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\asgiref\sync.py:331> cb=[_run_until_complete_cb() at C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.2032.0_x64__qbz5n2kfra8p0\Lib\asyncio\base_events.py:182]> got Future <Future pending> attached to a different loop
 Traceback (most recent call last):
   File "D:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\app.py", line 880, in full_dispatch_request
     rv = self.dispatch_request()
          ^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\app.py", line 854, in dispatch_request
-    self.raise_routing_exception(req)
-  File "D:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\app.py", line 463, in raise_routing_exception
-    raise request.routing_exception  # type: ignore[misc]
-    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\ctx.py", line 362, in match_request
-    result = self.url_adapter.match(return_rule=True)  # type: ignore
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\werkzeug\routing\map.py", line 624, in match
-    raise MethodNotAllowed(valid_methods=list(e.have_match_for)) from None
-werkzeug.exceptions.MethodNotAllowed: 405 Method Not Allowed: The method is not allowed for the requested URL.
+  File "D:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\app.py", line 865, in dispatch_request
+    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\asgiref\sync.py", line 254, in __call__
+    return call_result.result()
+           ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.2032.0_x64__qbz5n2kfra8p0\Lib\concurrent\futures\_base.py", line 449, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.2032.0_x64__qbz5n2kfra8p0\Lib\concurrent\futures\_base.py", line 401, in __get_result
+    raise self._exception
+  File "D:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\asgiref\sync.py", line 331, in main_wrap
+    result = await self.awaitable(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Development\full-stack-2024\flask-rest-api\src\controllers\user_controller_async.py", line 11, in get_all_users
+    users = await user_async_service.get_all()
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Development\full-stack-2024\flask-rest-api\src\services\user_service_async.py", line 13, in get_all
+    await cursor.execute("select * from users")
+  File "D:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\mysql\connector\aio\cursor.py", line 699, in execute
+    await self._handle_result(await self._connection.cmd_query(stmt))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\mysql\connector\aio\connection.py", line 993, in cmd_query
+    await self._send_cmd(ServerCmd.QUERY, query)
+  File "D:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\mysql\connector\aio\connection.py", line 574, in _send_cmd
+    return await self._socket.read()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\mysql\connector\aio\network.py", line 552, in read
+    return await self._netbroker.read(self._reader, self.address)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\mysql\connector\aio\network.py", line 243, in read
+    header = await self._read_chunk(reader, size=PACKET_HEADER_LENGTH)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\mysql\connector\aio\network.py", line 195, in _read_chunk
+    chunk = await reader.read(size - len(pkt))
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.2032.0_x64__qbz5n2kfra8p0\Lib\asyncio\streams.py", line 713, in read
+    await self._wait_for_data('read')
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.2032.0_x64__qbz5n2kfra8p0\Lib\asyncio\streams.py", line 545, in _wait_for_data
+    await self._waiter
+RuntimeError: Task <Task pending name='Task-13' coro=<AsyncToSync.main_wrap() running at D:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\asgiref\sync.py:331> cb=[_run_until_complete_cb() at C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.2032.0_x64__qbz5n2kfra8p0\Lib\asyncio\base_events.py:182]> got Future <Future pending> attached to a different loop
 ERROR:src:404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
 Traceback (most recent call last):
   File "D:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\app.py", line 880, in full_dispatch_request
@@ -113,7 +60,63 @@ Traceback (most recent call last):
   File "D:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\werkzeug\routing\map.py", line 629, in match
     raise NotFound() from None
 werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
-ERROR:src:'user_id'
+ERROR:src:Failed processing format-parameters; Event loop is closed
+Traceback (most recent call last):
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.2032.0_x64__qbz5n2kfra8p0\Lib\asyncio\sslproto.py", line 694, in _write_appdata
+    self._do_write()
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.2032.0_x64__qbz5n2kfra8p0\Lib\asyncio\sslproto.py", line 713, in _do_write
+    self._process_outgoing()
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.2032.0_x64__qbz5n2kfra8p0\Lib\asyncio\sslproto.py", line 719, in _process_outgoing
+    self._transport.write(data)
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.2032.0_x64__qbz5n2kfra8p0\Lib\asyncio\proactor_events.py", line 366, in write
+    self._loop_writing(data=bytes(data))
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.2032.0_x64__qbz5n2kfra8p0\Lib\asyncio\proactor_events.py", line 402, in _loop_writing
+    self._write_fut = self._loop._proactor.send(self._sock, data)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'send'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\mysql\connector\aio\cursor.py", line 204, in _process_params
+    sql_mode = await self._connection.get_sql_mode()
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\mysql\connector\aio\abstracts.py", line 834, in get_sql_mode
+    self._sql_mode = (await self.info_query("SELECT @@session.sql_mode"))[0]
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\mysql\connector\aio\abstracts.py", line 1264, in info_query
+    await cursor.execute(query)
+  File "D:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\mysql\connector\aio\cursor.py", line 699, in execute
+    await self._handle_result(await self._connection.cmd_query(stmt))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\mysql\connector\aio\connection.py", line 993, in cmd_query
+    await self._send_cmd(ServerCmd.QUERY, query)
+  File "D:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\mysql\connector\aio\connection.py", line 564, in _send_cmd
+    await self._socket.write(
+  File "D:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\mysql\connector\aio\network.py", line 542, in write
+    await self._netbroker.write(
+  File "D:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\mysql\connector\aio\network.py", line 231, in write
+    await self._write_pkt(
+  File "D:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\mysql\connector\aio\network.py", line 180, in _write_pkt
+    writer.write(pkt)
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.2032.0_x64__qbz5n2kfra8p0\Lib\asyncio\streams.py", line 346, in write
+    self._transport.write(data)
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.2032.0_x64__qbz5n2kfra8p0\Lib\asyncio\sslproto.py", line 222, in write
+    self._ssl_protocol._write_appdata((data,))
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.2032.0_x64__qbz5n2kfra8p0\Lib\asyncio\sslproto.py", line 697, in _write_appdata
+    self._fatal_error(ex, 'Fatal error on SSL protocol')
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.2032.0_x64__qbz5n2kfra8p0\Lib\asyncio\sslproto.py", line 915, in _fatal_error
+    self._transport._force_close(exc)
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.2032.0_x64__qbz5n2kfra8p0\Lib\asyncio\proactor_events.py", line 152, in _force_close
+    self._loop.call_soon(self._call_connection_lost, exc)
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.2032.0_x64__qbz5n2kfra8p0\Lib\asyncio\base_events.py", line 795, in call_soon
+    self._check_closed()
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.2032.0_x64__qbz5n2kfra8p0\Lib\asyncio\base_events.py", line 541, in _check_closed
+    raise RuntimeError('Event loop is closed')
+RuntimeError: Event loop is closed
+
+The above exception was the direct cause of the following exception:
+
 Traceback (most recent call last):
   File "D:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\app.py", line 880, in full_dispatch_request
     rv = self.dispatch_request()
@@ -121,173 +124,142 @@ Traceback (most recent call last):
   File "D:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\app.py", line 865, in dispatch_request
     return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\Development\full-stack-2024\flask-rest-api\src\controllers\book_trans_controller.py", line 53, in process_late_fees
-    result = trans_service.process_late_fees()
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\Development\full-stack-2024\flask-rest-api\src\services\book_trans_service.py", line 284, in process_late_fees
-    "user_id": trans['user_id'],
-               ~~~~~^^^^^^^^^^^
-KeyError: 'user_id'
-ERROR:src:list index out of range
+  File "D:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\asgiref\sync.py", line 254, in __call__
+    return call_result.result()
+           ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.2032.0_x64__qbz5n2kfra8p0\Lib\concurrent\futures\_base.py", line 449, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.2032.0_x64__qbz5n2kfra8p0\Lib\concurrent\futures\_base.py", line 401, in __get_result
+    raise self._exception
+  File "D:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\asgiref\sync.py", line 331, in main_wrap
+    result = await self.awaitable(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Development\full-stack-2024\flask-rest-api\src\controllers\user_controller_async.py", line 17, in get_user
+    user = await user_async_service.get_by_id(user_id)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Development\full-stack-2024\flask-rest-api\src\services\user_service_async.py", line 24, in get_by_id
+    await cursor.execute("select * from users where id = %s", (id,))
+  File "D:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\mysql\connector\aio\cursor.py", line 695, in execute
+    stmt = await self._prepare_statement(operation, params)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\mysql\connector\aio\cursor.py", line 446, in _prepare_statement
+    psub = _ParamSubstitutor(await self._process_params(params))
+                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\mysql\connector\aio\cursor.py", line 215, in _process_params
+    raise ProgrammingError(
+mysql.connector.errors.ProgrammingError: Failed processing format-parameters; Event loop is closed
+ERROR:src:Event loop is closed
 Traceback (most recent call last):
-  File "d:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\app.py", line 880, in full_dispatch_request
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.2032.0_x64__qbz5n2kfra8p0\Lib\asyncio\sslproto.py", line 694, in _write_appdata
+    self._do_write()
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.2032.0_x64__qbz5n2kfra8p0\Lib\asyncio\sslproto.py", line 713, in _do_write
+    self._process_outgoing()
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.2032.0_x64__qbz5n2kfra8p0\Lib\asyncio\sslproto.py", line 719, in _process_outgoing
+    self._transport.write(data)
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.2032.0_x64__qbz5n2kfra8p0\Lib\asyncio\proactor_events.py", line 366, in write
+    self._loop_writing(data=bytes(data))
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.2032.0_x64__qbz5n2kfra8p0\Lib\asyncio\proactor_events.py", line 402, in _loop_writing
+    self._write_fut = self._loop._proactor.send(self._sock, data)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+AttributeError: 'NoneType' object has no attribute 'send'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "D:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\app.py", line 880, in full_dispatch_request
     rv = self.dispatch_request()
          ^^^^^^^^^^^^^^^^^^^^^^^
-  File "d:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\app.py", line 865, in dispatch_request
+  File "D:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\app.py", line 865, in dispatch_request
     return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\Development\full-stack-2024\flask-rest-api\src\controllers\book_trans_controller.py", line 19, in get_late_all
-    result = trans_service.get_late_trans()
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\Development\full-stack-2024\flask-rest-api\src\services\book_trans_service.py", line 203, in get_late_trans
-    data[item['hdr_id']]['details'].append(details)
-    ~~~~^^^^^^^^^^^^^^^^
-IndexError: list index out of range
-ERROR:src:404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+  File "D:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\asgiref\sync.py", line 254, in __call__
+    return call_result.result()
+           ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.2032.0_x64__qbz5n2kfra8p0\Lib\concurrent\futures\_base.py", line 449, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.2032.0_x64__qbz5n2kfra8p0\Lib\concurrent\futures\_base.py", line 401, in __get_result
+    raise self._exception
+  File "D:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\asgiref\sync.py", line 331, in main_wrap
+    result = await self.awaitable(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Development\full-stack-2024\flask-rest-api\src\controllers\user_controller_async.py", line 11, in get_all_users
+    users = await user_async_service.get_all()
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Development\full-stack-2024\flask-rest-api\src\services\user_service_async.py", line 12, in get_all
+    await cursor.execute("select * from users")
+  File "D:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\mysql\connector\aio\cursor.py", line 699, in execute
+    await self._handle_result(await self._connection.cmd_query(stmt))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\mysql\connector\aio\connection.py", line 993, in cmd_query
+    await self._send_cmd(ServerCmd.QUERY, query)
+  File "D:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\mysql\connector\aio\connection.py", line 564, in _send_cmd
+    await self._socket.write(
+  File "D:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\mysql\connector\aio\network.py", line 542, in write
+    await self._netbroker.write(
+  File "D:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\mysql\connector\aio\network.py", line 231, in write
+    await self._write_pkt(
+  File "D:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\mysql\connector\aio\network.py", line 180, in _write_pkt
+    writer.write(pkt)
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.2032.0_x64__qbz5n2kfra8p0\Lib\asyncio\streams.py", line 346, in write
+    self._transport.write(data)
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.2032.0_x64__qbz5n2kfra8p0\Lib\asyncio\sslproto.py", line 222, in write
+    self._ssl_protocol._write_appdata((data,))
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.2032.0_x64__qbz5n2kfra8p0\Lib\asyncio\sslproto.py", line 697, in _write_appdata
+    self._fatal_error(ex, 'Fatal error on SSL protocol')
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.2032.0_x64__qbz5n2kfra8p0\Lib\asyncio\sslproto.py", line 915, in _fatal_error
+    self._transport._force_close(exc)
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.2032.0_x64__qbz5n2kfra8p0\Lib\asyncio\proactor_events.py", line 152, in _force_close
+    self._loop.call_soon(self._call_connection_lost, exc)
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.2032.0_x64__qbz5n2kfra8p0\Lib\asyncio\base_events.py", line 795, in call_soon
+    self._check_closed()
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.2032.0_x64__qbz5n2kfra8p0\Lib\asyncio\base_events.py", line 541, in _check_closed
+    raise RuntimeError('Event loop is closed')
+RuntimeError: Event loop is closed
+ERROR:src:Task <Task pending name='Task-7' coro=<AsyncToSync.main_wrap() running at D:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\asgiref\sync.py:331> cb=[_run_until_complete_cb() at C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.2032.0_x64__qbz5n2kfra8p0\Lib\asyncio\base_events.py:182]> got Future <Future pending> attached to a different loop
 Traceback (most recent call last):
-  File "d:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\app.py", line 880, in full_dispatch_request
+  File "D:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\app.py", line 880, in full_dispatch_request
     rv = self.dispatch_request()
          ^^^^^^^^^^^^^^^^^^^^^^^
-  File "d:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\app.py", line 854, in dispatch_request
-    self.raise_routing_exception(req)
-  File "d:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\app.py", line 463, in raise_routing_exception
-    raise request.routing_exception  # type: ignore[misc]
-    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "d:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\ctx.py", line 362, in match_request
-    result = self.url_adapter.match(return_rule=True)  # type: ignore
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "d:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\werkzeug\routing\map.py", line 629, in match
-    raise NotFound() from None
-werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
-ERROR:src:'id'
-Traceback (most recent call last):
-  File "d:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\app.py", line 880, in full_dispatch_request
-    rv = self.dispatch_request()
-         ^^^^^^^^^^^^^^^^^^^^^^^
-  File "d:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\app.py", line 865, in dispatch_request
+  File "D:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\app.py", line 865, in dispatch_request
     return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\Development\full-stack-2024\flask-rest-api\src\controllers\book_trans_controller.py", line 19, in get_late_all
-    result = trans_service.get_late_trans()
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\Development\full-stack-2024\flask-rest-api\src\services\book_trans_service.py", line 194, in get_late_trans
-    index = next((i for i, item in enumerate(results) if item['id'] == target_id), None)
-            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\Development\full-stack-2024\flask-rest-api\src\services\book_trans_service.py", line 194, in <genexpr>
-    index = next((i for i, item in enumerate(results) if item['id'] == target_id), None)
-                                                         ~~~~^^^^^^
-KeyError: 'id'
-ERROR:src:404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
-Traceback (most recent call last):
-  File "d:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\app.py", line 880, in full_dispatch_request
-    rv = self.dispatch_request()
-         ^^^^^^^^^^^^^^^^^^^^^^^
-  File "d:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\app.py", line 854, in dispatch_request
-    self.raise_routing_exception(req)
-  File "d:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\app.py", line 463, in raise_routing_exception
-    raise request.routing_exception  # type: ignore[misc]
-    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "d:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\ctx.py", line 362, in match_request
-    result = self.url_adapter.match(return_rule=True)  # type: ignore
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "d:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\werkzeug\routing\map.py", line 629, in match
-    raise NotFound() from None
-werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
-ERROR:src:'id'
-Traceback (most recent call last):
-  File "d:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\app.py", line 880, in full_dispatch_request
-    rv = self.dispatch_request()
-         ^^^^^^^^^^^^^^^^^^^^^^^
-  File "d:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\app.py", line 865, in dispatch_request
-    return self.ensure_sync(self.view_functions[rule.endpoint])(**view_args)  # type: ignore[no-any-return]
-           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\Development\full-stack-2024\flask-rest-api\src\controllers\book_trans_controller.py", line 19, in get_late_all
-    result = trans_service.get_late_trans()
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\Development\full-stack-2024\flask-rest-api\src\services\book_trans_service.py", line 194, in get_late_trans
-    index = next((i for i, item in enumerate(results) if item['id'] == trx['hdr_id']), None)
-            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "D:\Development\full-stack-2024\flask-rest-api\src\services\book_trans_service.py", line 194, in <genexpr>
-    index = next((i for i, item in enumerate(results) if item['id'] == trx['hdr_id']), None)
-                                                         ~~~~^^^^^^
-KeyError: 'id'
-ERROR:src:404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
-Traceback (most recent call last):
-  File "d:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\app.py", line 880, in full_dispatch_request
-    rv = self.dispatch_request()
-         ^^^^^^^^^^^^^^^^^^^^^^^
-  File "d:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\app.py", line 854, in dispatch_request
-    self.raise_routing_exception(req)
-  File "d:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\app.py", line 463, in raise_routing_exception
-    raise request.routing_exception  # type: ignore[misc]
-    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "d:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\ctx.py", line 362, in match_request
-    result = self.url_adapter.match(return_rule=True)  # type: ignore
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "d:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\werkzeug\routing\map.py", line 629, in match
-    raise NotFound() from None
-werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
-ERROR:src:404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
-Traceback (most recent call last):
-  File "d:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\app.py", line 880, in full_dispatch_request
-    rv = self.dispatch_request()
-         ^^^^^^^^^^^^^^^^^^^^^^^
-  File "d:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\app.py", line 854, in dispatch_request
-    self.raise_routing_exception(req)
-  File "d:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\app.py", line 463, in raise_routing_exception
-    raise request.routing_exception  # type: ignore[misc]
-    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "d:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\ctx.py", line 362, in match_request
-    result = self.url_adapter.match(return_rule=True)  # type: ignore
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "d:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\werkzeug\routing\map.py", line 629, in match
-    raise NotFound() from None
-werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
-ERROR:src:404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
-Traceback (most recent call last):
-  File "d:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\app.py", line 880, in full_dispatch_request
-    rv = self.dispatch_request()
-         ^^^^^^^^^^^^^^^^^^^^^^^
-  File "d:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\app.py", line 854, in dispatch_request
-    self.raise_routing_exception(req)
-  File "d:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\app.py", line 463, in raise_routing_exception
-    raise request.routing_exception  # type: ignore[misc]
-    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "d:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\ctx.py", line 362, in match_request
-    result = self.url_adapter.match(return_rule=True)  # type: ignore
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "d:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\werkzeug\routing\map.py", line 629, in match
-    raise NotFound() from None
-werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
-ERROR:src:404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
-Traceback (most recent call last):
-  File "d:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\app.py", line 880, in full_dispatch_request
-    rv = self.dispatch_request()
-         ^^^^^^^^^^^^^^^^^^^^^^^
-  File "d:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\app.py", line 854, in dispatch_request
-    self.raise_routing_exception(req)
-  File "d:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\app.py", line 463, in raise_routing_exception
-    raise request.routing_exception  # type: ignore[misc]
-    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "d:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\ctx.py", line 362, in match_request
-    result = self.url_adapter.match(return_rule=True)  # type: ignore
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "d:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\werkzeug\routing\map.py", line 629, in match
-    raise NotFound() from None
-werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
-ERROR:src:404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
-Traceback (most recent call last):
-  File "d:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\app.py", line 880, in full_dispatch_request
-    rv = self.dispatch_request()
-         ^^^^^^^^^^^^^^^^^^^^^^^
-  File "d:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\app.py", line 854, in dispatch_request
-    self.raise_routing_exception(req)
-  File "d:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\app.py", line 463, in raise_routing_exception
-    raise request.routing_exception  # type: ignore[misc]
-    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "d:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\flask\ctx.py", line 362, in match_request
-    result = self.url_adapter.match(return_rule=True)  # type: ignore
-             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
-  File "d:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\werkzeug\routing\map.py", line 629, in match
-    raise NotFound() from None
-werkzeug.exceptions.NotFound: 404 Not Found: The requested URL was not found on the server. If you entered the URL manually please check your spelling and try again.
+  File "D:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\asgiref\sync.py", line 254, in __call__
+    return call_result.result()
+           ^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.2032.0_x64__qbz5n2kfra8p0\Lib\concurrent\futures\_base.py", line 449, in result
+    return self.__get_result()
+           ^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.2032.0_x64__qbz5n2kfra8p0\Lib\concurrent\futures\_base.py", line 401, in __get_result
+    raise self._exception
+  File "D:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\asgiref\sync.py", line 331, in main_wrap
+    result = await self.awaitable(*args, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Development\full-stack-2024\flask-rest-api\src\controllers\user_controller_async.py", line 11, in get_all_users
+    users = await user_async_service.get_all()
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Development\full-stack-2024\flask-rest-api\src\services\user_service_async.py", line 12, in get_all
+    await cursor.execute("select * from users")
+  File "D:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\mysql\connector\aio\cursor.py", line 699, in execute
+    await self._handle_result(await self._connection.cmd_query(stmt))
+                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\mysql\connector\aio\connection.py", line 993, in cmd_query
+    await self._send_cmd(ServerCmd.QUERY, query)
+  File "D:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\mysql\connector\aio\connection.py", line 574, in _send_cmd
+    return await self._socket.read()
+           ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\mysql\connector\aio\network.py", line 552, in read
+    return await self._netbroker.read(self._reader, self.address)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\mysql\connector\aio\network.py", line 243, in read
+    header = await self._read_chunk(reader, size=PACKET_HEADER_LENGTH)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "D:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\mysql\connector\aio\network.py", line 195, in _read_chunk
+    chunk = await reader.read(size - len(pkt))
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.2032.0_x64__qbz5n2kfra8p0\Lib\asyncio\streams.py", line 713, in read
+    await self._wait_for_data('read')
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.2032.0_x64__qbz5n2kfra8p0\Lib\asyncio\streams.py", line 545, in _wait_for_data
+    await self._waiter
+RuntimeError: Task <Task pending name='Task-7' coro=<AsyncToSync.main_wrap() running at D:\Development\full-stack-2024\flask-rest-api\.venv\Lib\site-packages\asgiref\sync.py:331> cb=[_run_until_complete_cb() at C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.12_3.12.2032.0_x64__qbz5n2kfra8p0\Lib\asyncio\base_events.py:182]> got Future <Future pending> attached to a different loop

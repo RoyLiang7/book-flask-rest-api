@@ -1,12 +1,10 @@
 
 from abc import ABC, abstractmethod
-from src.utilities.database import cnx
-
+from src.utilities.db_connection import MyDatabaseConnection
 
 class BaseService(ABC):
-    
     def __init__(self):
-        self.dbcnx = cnx
+        self.dbcnx = MyDatabaseConnection()
 
     @abstractmethod
     def get_all(self):
