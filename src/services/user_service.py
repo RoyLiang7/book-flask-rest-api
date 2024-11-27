@@ -1,8 +1,9 @@
 from flask import jsonify
 from flask_jwt_extended import create_access_token
 
-from src.services.base_service import BaseService
 from src import bcrypt
+from src.services.base_service import BaseService
+
 
 
 class UserService(BaseService):
@@ -37,6 +38,7 @@ class UserService(BaseService):
         return result
 
     def create(self, model):
+        # mode['email'], model['password']
         pw_hash = bcrypt.generate_password_hash(model['password']).decode('utf-8')
 
         cursor = self.dbcnx.cursor()
@@ -115,14 +117,16 @@ class UserService(BaseService):
 
 
     def authenticate(self, data):
+        # model['email'] / model['password'] ==> liang@returnlegacy / 111111
         cursor = self.dbcnx.cursor(dictionary=True)
         cursor.execute("select id, name, email, password, status from users where email = %s", (data["email"],))
         result = cursor.fetchone()
         cursor.close()
 
         if result:
-            pw_hash = bcrypt.generate_password_hash(data['password']).decode('utf-8')
-            if result['password'] == pw_hash:
+            # 111111 ====> $2b$12$voL3qAbSMhGAhW.nK6cLU.7s8lb3u5IDEznflhjUIqeZLbyy.5.2i
+            # pw_hash = bcrypt.generate_password_hash(data['password']).decode('utf-8')
+            if bcrypt.check_password_hash(result['password'], data['password']):
                 return result
             
         return None
@@ -132,7 +136,7 @@ class UserService(BaseService):
         if not user:
             return {"msg": "Bad email or password"}
 
-        access_token = create_access_token(identity=user)
+        access_token = create_access_token(identity=user['email'])
         return {"access_token": access_token, "user": user}
 
     def get_hash(self, pwd):

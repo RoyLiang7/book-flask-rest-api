@@ -69,7 +69,7 @@ def delete(id):
 from src import basic_auth
 
 @user_bp.route("/token", methods=["POST"])
-# @basic_auth.required
+@basic_auth.required
 def get_token():
     data = request.get_json()
     result = user_srv.get_token(data)

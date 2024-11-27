@@ -1,4 +1,4 @@
-
+from src import basic_auth
 from src.services.role_service import RoleService
 
 from flask import Blueprint, jsonify, request
@@ -8,6 +8,7 @@ role_srv = RoleService()
 
 
 @role_bp.route("/", methods=["GET"])
+@basic_auth.required
 def get_all():
     result = role_srv.get_all()
     # jsonstr1 = json.dumps(s1.__dict__) 

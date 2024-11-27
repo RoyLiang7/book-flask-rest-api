@@ -68,7 +68,10 @@ bcrypt = Bcrypt(app)
 from flask_basicauth import BasicAuth
 basic_auth = BasicAuth(app)
 
-
+# ======================= j w t   m a n a g e r ====================== #
+# JWT Initialization
+from flask_jwt_extended import JWTManager
+jwt = JWTManager(app)
 
 
 # ========================= r o u t i n g ============================= #
@@ -93,11 +96,6 @@ app.register_blueprint(trans_bp, url_prefix="/book/transaction")
 
 
 
-# ======================= j w t   m a n a g e r ====================== #
-# JWT Initialization
-from flask_jwt_extended import JWTManager
-
-jwt = JWTManager(app)
 
 # -- overrides
 # @jwt.additional_claims_loader           # generally used for authorisation
